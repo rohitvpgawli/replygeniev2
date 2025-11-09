@@ -1,0 +1,5 @@
+
+
+> @replygenie/api-contract@0.1.0 type-check /Users/rohitgawli/Documents/GitHub/replygeniev2/packages/api-contract
+> tsc --noEmit
+
