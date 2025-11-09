@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
-import { LogOut, LayoutDashboard, Settings as SettingsIcon, Activity, Menu } from 'lucide-react';
+import { LogOut, LayoutDashboard, Settings as SettingsIcon, Activity, Menu, Inbox } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -95,6 +95,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 
   const navItems = [
     { href: '/app/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
+    { href: '/app/inbox', icon: Inbox, label: 'Inbox' },
     { href: '/app/activity', icon: Activity, label: 'Activity' },
     { href: '/app/settings', icon: SettingsIcon, label: 'Settings' }
   ];

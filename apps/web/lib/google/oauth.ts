@@ -109,6 +109,46 @@ export async function getValidAccessToken(teamId: number): Promise<string | null
 }
 
 /**
+ * Refreshes an access token using a refresh token
+ * Returns the new access token and expiry time
+ */
+export async function refreshAccessToken(encryptedRefreshToken: string): Promise<{
+  accessToken: string;
+  expiresAt: Date;
+}> {
+  const refreshToken = decryptToken(encryptedRefreshToken);
+  if (!refreshToken) {
+    throw new Error('Invalid refresh token');
+  }
+
+  const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      client_id: process.env.GOOGLE_CLIENT_ID!,
+      client_secret: process.env.GOOGLE_CLIENT_SECRET!,
+      refresh_token: refreshToken,
+      grant_type: 'refresh_token',
+    }),
+  });
+
+  if (!tokenResponse.ok) {
+    const errorData = await tokenResponse.text();
+    throw new Error(`Token refresh failed: ${errorData}`);
+  }
+
+  const tokens: GoogleTokenResponse = await tokenResponse.json();
+  const expiresAt = new Date(Date.now() + tokens.expires_in * 1000);
+
+  return {
+    accessToken: tokens.access_token,
+    expiresAt,
+  };
+}
+
+/**
  * Checks if a team has an active Google connection
  */
 export async function hasActiveConnection(teamId: number): Promise<boolean> {

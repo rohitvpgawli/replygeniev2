@@ -41,10 +41,7 @@ export async function GET() {
       .where(eq(rcLocations.teamId, team.id))
       .orderBy(rcLocations.name);
 
-    return NextResponse.json({
-      locations,
-      count: locations.length,
-    });
+    return NextResponse.json(locations);
   } catch (error) {
     console.error('Error fetching locations:', error);
     return NextResponse.json(

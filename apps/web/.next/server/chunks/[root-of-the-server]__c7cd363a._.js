@@ -707,7 +707,8 @@ function decryptToken(encryptedToken) {
 __turbopack_context__.s({
     "getConnectionStatus": (()=>getConnectionStatus),
     "getValidAccessToken": (()=>getValidAccessToken),
-    "hasActiveConnection": (()=>hasActiveConnection)
+    "hasActiveConnection": (()=>hasActiveConnection),
+    "refreshAccessToken": (()=>refreshAccessToken)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$drizzle$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/apps/web/lib/db/drizzle.ts [app-route] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/apps/web/lib/db/schema.ts [app-route] (ecmascript)");
@@ -779,6 +780,34 @@ async function getValidAccessToken(teamId) {
         console.error('Error getting valid access token:', error);
         return null;
     }
+}
+async function refreshAccessToken(encryptedRefreshToken) {
+    const refreshToken = (0, __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$encryption$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["decryptToken"])(encryptedRefreshToken);
+    if (!refreshToken) {
+        throw new Error('Invalid refresh token');
+    }
+    const tokenResponse = await fetch(GOOGLE_TOKEN_URL, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            client_id: process.env.GOOGLE_CLIENT_ID,
+            client_secret: process.env.GOOGLE_CLIENT_SECRET,
+            refresh_token: refreshToken,
+            grant_type: 'refresh_token'
+        })
+    });
+    if (!tokenResponse.ok) {
+        const errorData = await tokenResponse.text();
+        throw new Error(`Token refresh failed: ${errorData}`);
+    }
+    const tokens = await tokenResponse.json();
+    const expiresAt = new Date(Date.now() + tokens.expires_in * 1000);
+    return {
+        accessToken: tokens.access_token,
+        expiresAt
+    };
 }
 async function hasActiveConnection(teamId) {
     const [connection] = await __TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$drizzle$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["db"].select().from(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["rcConnections"]).where((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["and"])((0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["rcConnections"].teamId, teamId), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["rcConnections"].provider, 'google'), (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$sql$2f$expressions$2f$conditions$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["eq"])(__TURBOPACK__imported__module__$5b$project$5d2f$apps$2f$web$2f$lib$2f$db$2f$schema$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["rcConnections"].status, 'active'))).limit(1);

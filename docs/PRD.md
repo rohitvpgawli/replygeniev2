@@ -106,14 +106,17 @@ Out (MVP)
 
 7) UX Routes (Next.js App Router)
 
-Shell: Left sidebar (Dashboard, Activity, Settings); slim header.
-	•	/app/dashboard — 2 KPI cards; table of recent 5 reviews.
+Shell: Left sidebar (Dashboard, Inbox, Activity, Settings); slim header.
+	•	/app/dashboard — 4 KPI cards (Needing Reply, Replies 30d, Avg Response, Total Reviews); table of recent 5 reviews.
 	•	/app/inbox — filters (Location, Rating, Status); rows with review snippet + draft; actions: Generate/Regenerate, Edit, Approve & Post.
 	•	/app/activity — audit log of all actions (posted replies, edits, etc.)
-	•	/app/settings
+	•	/app/settings — tabbed layout with General, Integrations, Brand Voice
+	•	/general: Organization info, connected locations with verification status, usage & limits
 	•	/integrations: Connect Google, Locations table (per-row Sync Reviews), Sync Locations
+	•	/brand-voice: Tone guidance, contact channel for negative reviews
 	•	/security: Password management, account deletion
 	•	/app → redirects to /app/dashboard
+	•	/app/settings → redirects to /app/settings/general
 	•	/sign-in, /sign-up — authentication pages
 
 Extension (MV3): On https://business.google.com/* inject Generate Draft button; paste into reply box. If selector fails, show “Open Inbox” link.
@@ -122,11 +125,17 @@ Extension (MV3): On https://business.google.com/* inject Generate Draft button; 
 
 8) API (v1) — Minimal Contracts
 	•	GET /api/v1/health → { ok: true, minClientVersion: "1.0.0" }
-	•	GET /api/v1/locations → [{ id, displayName, googleLocationId, autopostEnabled:false }]
-	•	POST /api/v1/reviews/sync { locationId } → { fetched, newDrafts }
-	•	POST /api/v1/drafts/:reviewId → { draftId, text, riskFlags }
-	•	POST /api/v1/replies/:reviewId { text } → { replyId, postedAt }
-	•	DELETE /api/v1/replies/:reviewId → 204 (optional; can defer if time tight)
+	•	GET /api/v1/locations → [{ id, name, googleLocationId, isVerified, ... }]
+	•	GET /api/v1/reviews?locationId&rating&status → [{ review, location, draft }]
+	•	POST /api/v1/reviews/sync { locationId } → { newReviews, totalReviews }
+	•	POST /api/v1/drafts/:reviewId → { draft, message }
+	•	PATCH /api/v1/drafts/:reviewId { text } → { draft, message }
+	•	DELETE /api/v1/drafts/:reviewId → { message }
+	•	POST /api/v1/replies/:reviewId { text } → { reply, message }
+	•	GET/POST /api/v1/brand-voice → { brandVoiceGuidance, contactChannel }
+	•	GET /api/v1/dashboard/stats → { needingReply, repliesPosted30d, avgResponseTime, totalReviews }
+	•	GET /api/v1/dashboard/recent-reviews → [{ review, location }]
+	•	GET /api/v1/settings/team-info → { name, createdAt, memberCount }
 
 Google OAuth
 	•	GET /api/google/oauth/start → redirects to Google
@@ -230,9 +239,17 @@ Phase 1 (Foundation & Authentication) — ✅ COMPLETED
 	•	Security: AES-256-GCM encryption for tokens, CSRF protection, RLS-ready schema
 	•	Review sync service: incremental sync with cursor tracking
 	•	Routing: Fixed structure with /app/* routes, removed /general, dashboard as default
+	•	Environment: Single root .env file with dotenv loading in next.config.ts
 
-Phase 2 (Inbox & Drafting) — 🔄 IN PROGRESS
-	•	Next: Inbox page, AI draft generation, brand voice settings, approve & post
+Phase 2 (Inbox & Drafting) — ✅ COMPLETED
+	•	Inbox page with filters (Location, Rating, Status)
+	•	AI draft generation with Gemini 2.0 Flash Exp
+	•	Brand voice settings with tabbed layout
+	•	Approve & post service with idempotency
+	•	Dashboard with 4 KPI cards
+	•	Settings/General page with organization & location info
+	•	Inbox added to sidebar navigation
+	•	OAuth configuration: Verified working with correct Client ID from root .env
 
 ⸻
 

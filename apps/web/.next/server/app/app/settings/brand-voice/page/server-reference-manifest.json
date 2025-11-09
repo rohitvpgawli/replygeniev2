@@ -1,0 +1,16 @@
+{
+  "node": {
+    "003e4ea74a851d197d25f62e5aae17ae924ba89509": {
+      "workers": {
+        "app/app/settings/brand-voice/page": {
+          "moduleId": "[project]/apps/web/.next-internal/server/app/app/settings/brand-voice/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false
+        }
+      },
+      "layer": {
+        "app/app/settings/brand-voice/page": "action-browser"
+      }
+    }
+  },
+  "edge": {}
+}

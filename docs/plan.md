@@ -127,13 +127,14 @@ pnpm install
 
 #### 1.M2 Environment Variables Setup
 **Instructions:**
-1. Copy `.env.example` to `.env.local`
+1. Create `.env` file in **root directory** (not in apps/web)
 2. Add the following variables:
 ```env
 # Google OAuth
 GOOGLE_CLIENT_ID=<from step 1.M1>
 GOOGLE_CLIENT_SECRET=<from step 1.M1>
 GOOGLE_REDIRECT_URI=http://localhost:3000/api/google/oauth/callback
+BASE_URL=http://localhost:3000
 
 # Database (already configured via docker-compose)
 DATABASE_URL=<existing value>
@@ -145,6 +146,7 @@ TOKEN_ENCRYPTION_KEY=<generate 32-byte random string>
 ```bash
 node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
+4. **Note**: Use single root `.env` file. Next.js loads it via dotenv in next.config.ts
 
 #### 1.M3 Database Setup
 **Instructions:**
@@ -175,24 +177,30 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 - Active routes: `/app/dashboard`, `/app/activity`, `/app/settings/*`
 - Added redirect pages: `/app` → `/app/dashboard`, `/app/settings` → `/app/settings/integrations`
 
+**Environment Configuration**:
+- Single root `.env` file (removed duplicate apps/web/.env)
+- Turborepo globalEnv configured for all environment variables
+- Next.js loads root .env via dotenv in next.config.ts
+- OAuth verified working with correct Client ID on port 3000
+
 ---
 
-## Phase 2: Core Features - Inbox & Drafting (Days 5-10)
+## ✅ Phase 2: Core Features - Inbox & Drafting (Days 5-10) - COMPLETED
 
 ### 🤖 AI Code Editor Tasks
 
 #### 2.1 Review Sync Service
-- [ ] Implement `syncReviews(locationId)` function:
+- [x] Implement `syncReviews(locationId)` function:
   - Fetch reviews from GBP API using stored tokens
   - Respect `sync_cursor` for incremental sync
   - Insert new reviews, skip existing (by `google_review_id`)
   - Update location's `sync_cursor` timestamp
   - Handle pagination for locations with many reviews
-- [ ] Add retry logic with exponential backoff for 429/5xx errors
-- [ ] Update `POST /api/v1/reviews/sync` to use service
+- [x] Add retry logic with exponential backoff for 429/5xx errors
+- [x] Update `POST /api/v1/reviews/sync` to use service
 
 #### 2.2 Inbox Page (Apple Design)
-- [ ] Build `/apps/web/app/(dashboard)/inbox` with Apple aesthetics:
+- [x] Build `/apps/web/app/app/inbox` with Apple aesthetics:
   - **Layout**: Spacious padding (p-6 lg:p-12), gradient background (white to gray-50/50)
   - **Filters**: Clean dropdown pills with rounded-xl, subtle borders
   - **Review cards**: rounded-2xl, generous padding (p-6), shadow-sm, hover:shadow-md
@@ -203,12 +211,13 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
     - Secondary "Regenerate", "Edit": Outlined, rounded-xl
     - Success "Approve & Post": Green accent, rounded-xl, bold
   - **Transitions**: Smooth 200ms on all interactive elements
-- [ ] Implement filter logic with smooth animations
-- [ ] Empty state: Large icon (Lucide), 3xl heading, spacious layout
-- [ ] "Posted" badge: Green with checkmark icon, rounded-full, subtle shadow
+- [x] Implement filter logic with smooth animations
+- [x] Empty state: Large icon (Lucide), 3xl heading, spacious layout
+- [x] "Posted" badge: Green with checkmark icon, rounded-full, subtle shadow
+- [x] Added Inbox to sidebar navigation (between Dashboard and Activity)
 
 #### 2.3 AI Draft Generation Service
-- [ ] Create draft generation function with guardrails:
+- [x] Create draft generation function with guardrails:
   - Max 90 words (≤600 chars)
   - Must reference one concrete detail from review
   - 4-5★: appreciative, specific, no fluff
@@ -216,36 +225,38 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   - Same language as review (detect via library)
   - Sign-off: `— {LOCATION_NAME}`
   - Post-filter: strip URLs, mask profanity
-- [ ] Implement `POST /api/v1/drafts/:reviewId` endpoint
-- [ ] Store draft in `rc_drafts` with risk flags (JSONB)
-- [ ] Add "Regenerate" logic (delete old draft, generate new)
+- [x] Implement `POST /api/v1/drafts/:reviewId` endpoint
+- [x] Store draft in `rc_drafts` with risk flags (JSONB)
+- [x] Add "Regenerate" logic (delete old draft, generate new)
+- [x] Using Gemini 2.0 Flash Exp for AI generation
 
 #### 2.4 Brand Voice Settings (Apple Design)
-- [ ] Add `/apps/web/app/(dashboard)/settings/brand-voice` with:
+- [x] Add `/apps/web/app/app/settings/brand-voice` with:
   - **Layout**: Centered, spacious (max-w-2xl mx-auto, p-6 lg:p-12)
   - **Textarea**: h-32, rounded-xl, focus:ring-primary/20, subtle background
   - **Input**: h-11, rounded-xl, clean placeholder text
   - **Labels**: Semibold, generous spacing (mb-3)
   - **Save button**: Apple Blue, rounded-xl, h-11, full-width on mobile
   - **Helper text**: Muted color, smaller font, below inputs
-- [ ] Store in `rc_orgs` table (add `brand_voice_guidance` and `contact_channel` columns)
-- [ ] Pass brand voice to draft generation service
-- [ ] Add success toast with checkmark icon on save
+- [x] Store in `teams` table (`brand_voice_guidance` and `contact_channel` columns)
+- [x] Pass brand voice to draft generation service
+- [x] Add success toast with checkmark icon on save
+- [x] Created tabbed settings layout with General, Integrations, Brand Voice tabs
 
 #### 2.5 Approve & Post Service
-- [ ] Implement `postReply(reviewId, text)` function:
+- [x] Implement `postReply(reviewId, text)` function:
   - Post reply to GBP via API
   - Idempotent: check `rc_replies.review_id` UNIQUE constraint
   - Update `rc_reviews.replied = true`, `status = 'posted'`
   - Insert into `rc_replies` with `posted_by` (user ID)
   - Increment `rc_usage.posts_count` for current month
   - Create audit log entry in `rc_audit_logs`
-- [ ] Add retry logic for transient failures
-- [ ] Implement `POST /api/v1/replies/:reviewId` endpoint
-- [ ] Add quota check middleware (block if monthly limit exceeded)
+- [x] Add retry logic for transient failures (exponential backoff)
+- [x] Implement `POST /api/v1/replies/:reviewId` endpoint
+- [x] Add quota check middleware (block if monthly limit exceeded)
 
 #### 2.6 Dashboard Page (Apple Design)
-- [ ] Build `/apps/web/app/(dashboard)/dashboard` with Apple aesthetics:
+- [x] Build `/apps/web/app/app/dashboard` with Apple aesthetics:
   - **Layout**: Spacious padding (p-6 lg:p-12), gradient background
   - **Heading**: 4xl-5xl, bold, generous spacing (mb-8)
   - **KPI Cards**: 
@@ -262,10 +273,18 @@ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
   - **Empty state**: Large icon, 3xl heading, "Connect Google" CTA
 
 #### 2.7 Quota System
-- [ ] Add quota middleware to check `rc_usage` before posting
-- [ ] Set default limit: 100 posts/month per org (configurable)
-- [ ] Return 429 error with clear message if exceeded
-- [ ] Add quota display in Settings
+- [x] Add quota middleware to check `rc_usage` before posting
+- [x] Set default limit: 100 posts/month per org (configurable)
+- [x] Return 429 error with clear message if exceeded
+- [x] Add quota display in Settings/General page
+
+#### 2.8 Settings/General Page
+- [x] Create `/apps/web/app/app/settings/general` page with:
+  - Organization information (name, created date, member count)
+  - Connected locations display with verification status
+  - Location details (address, phone, website, last sync)
+  - Usage & limits section
+- [x] Implement `GET /api/v1/settings/team-info` endpoint
 
 ---
 

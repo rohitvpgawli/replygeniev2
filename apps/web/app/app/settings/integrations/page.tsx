@@ -73,7 +73,7 @@ export default function IntegrationsPage() {
       const locationsRes = await fetch('/api/v1/locations');
       if (locationsRes.ok) {
         const locationsData = await locationsRes.json();
-        setLocations(locationsData.locations || []);
+        setLocations(Array.isArray(locationsData) ? locationsData : []);
       }
     } catch (error) {
       console.error('Error loading data:', error);
@@ -149,39 +149,36 @@ export default function IntegrationsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50">
-      <div className="max-w-5xl mx-auto p-6 lg:p-12">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-3">Integrations</h1>
-          <p className="text-muted-foreground text-lg">
-            Connect your Google Business Profile to start managing reviews
-          </p>
-        </div>
+    <div className="max-w-4xl">
+      <div className="mb-6">
+        <p className="text-muted-foreground">
+          Connect your Google Business Profile to start managing reviews
+        </p>
+      </div>
 
-        {/* Message Banner */}
-        {message && (
-          <div
-            className={`mb-6 p-4 rounded-xl flex items-start gap-3 ${
-              message.type === 'success'
-                ? 'bg-green-50 text-green-900 border border-green-200'
-                : 'bg-red-50 text-red-900 border border-red-200'
-            }`}
+      {/* Message Banner */}
+      {message && (
+        <div
+          className={`mb-6 p-4 rounded-xl flex items-start gap-3 ${
+            message.type === 'success'
+              ? 'bg-green-50 text-green-900 border border-green-200'
+              : 'bg-red-50 text-red-900 border border-red-200'
+          }`}
+        >
+          {message.type === 'success' ? (
+            <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" />
+          ) : (
+            <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
+          )}
+          <p className="flex-1">{message.text}</p>
+          <button
+            onClick={() => setMessage(null)}
+            className="text-current opacity-60 hover:opacity-100"
           >
-            {message.type === 'success' ? (
-              <CheckCircle2 className="h-5 w-5 flex-shrink-0 mt-0.5" />
-            ) : (
-              <AlertCircle className="h-5 w-5 flex-shrink-0 mt-0.5" />
-            )}
-            <p className="flex-1">{message.text}</p>
-            <button
-              onClick={() => setMessage(null)}
-              className="text-current opacity-60 hover:opacity-100"
-            >
-              ×
-            </button>
-          </div>
-        )}
+            ×
+          </button>
+        </div>
+      )}
 
         {/* Google Business Profile Card */}
         <Card className="rounded-2xl border-border/50 p-8 shadow-sm hover:shadow-md transition-shadow duration-200">
@@ -332,7 +329,6 @@ export default function IntegrationsPage() {
             Make sure your Google Business Profile locations are verified. Only verified locations can receive review replies.
           </p>
         </div>
-      </div>
     </div>
   );
 }

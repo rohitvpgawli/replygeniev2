@@ -3,40 +3,7 @@
     "003e4ea74a851d197d25f62e5aae17ae924ba89509": {
       "workers": {
         "app/app/dashboard/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/apps/web/lib/payments/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/app/dashboard/page": "action-browser"
-      }
-    },
-    "7f672a757753387e21a5fa3765ea63155357a2d745": {
-      "workers": {
-        "app/app/dashboard/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/apps/web/lib/payments/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/app/dashboard/page": "action-browser"
-      }
-    },
-    "7f8c49dd622cf183726c6669ca499c5b9f4ba292f5": {
-      "workers": {
-        "app/app/dashboard/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/apps/web/lib/payments/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/app/dashboard/page": "action-browser"
-      }
-    },
-    "7f47e3b14f278d50698d2da5de6e67e22266e258d6": {
-      "workers": {
-        "app/app/dashboard/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/apps/web/lib/payments/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
           "async": false
         }
       },

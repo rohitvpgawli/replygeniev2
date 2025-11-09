@@ -15,15 +15,16 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
-    "@replygenie/shared": "workspace:*",
+    "@radix-ui/react-select": "^2.2.6",
     "@replygenie/api-contract": "workspace:*",
     "@replygenie/sdk": "workspace:*",
+    "@replygenie/shared": "workspace:*",
     "@tailwindcss/postcss": "4.1.7",
     "autoprefixer": "^10.4.21",
     "bcryptjs": "^3.0.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "dotenv": "^16.5.0",
+    "date-fns": "^4.1.0",
     "drizzle-kit": "^0.31.1",
     "drizzle-orm": "^0.43.1",
     "jose": "^6.0.11",
@@ -47,6 +48,7 @@
     "@types/node": "^22.15.18",
     "@types/react": "19.1.4",
     "@types/react-dom": "19.1.5",
+    "dotenv": "^16.6.1",
     "tsx": "^4.19.2"
   }
 }
