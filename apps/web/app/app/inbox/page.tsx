@@ -180,7 +180,7 @@ export default function InboxPage() {
 
   if (!reviews) {
     return (
-      <section className="flex-1 p-6 lg:p-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
+      <section className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
         <div className="flex items-center justify-center h-64">
           <Loader2 className="size-8 animate-spin text-primary" />
         </div>
@@ -189,8 +189,8 @@ export default function InboxPage() {
   }
 
   return (
-    <section className="flex-1 p-6 lg:p-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
-      <div className="max-w-6xl mx-auto">
+    <section className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
+      <div className="w-full max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">

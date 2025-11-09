@@ -149,7 +149,7 @@ export default function IntegrationsPage() {
   }
 
   return (
-    <div className="max-w-4xl">
+    <div className="w-full max-w-5xl">
       <div className="mb-6">
         <p className="text-muted-foreground">
           Connect your Google Business Profile to start managing reviews

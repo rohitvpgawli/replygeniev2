@@ -69,7 +69,7 @@ function UserMenu() {
 function Header() {
   return (
     <header className="border-b border-border/50 bg-white/80 backdrop-blur-xl sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-4 flex justify-between items-center">
+      <div className="w-full px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
         <Link
           href="/app/dashboard"
           className="flex items-center gap-2 group hover:opacity-80 transition-opacity"
@@ -104,15 +104,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <section className="flex flex-col min-h-screen">
       <Header />
       
-      <div className="flex flex-col flex-1 max-w-7xl mx-auto w-full">
-        {/* Mobile header */}
-        <div className="lg:hidden flex items-center justify-between bg-white border-b border-gray-200 p-4">
-          <div className="flex items-center">
-            <span className="font-medium">Menu</span>
-          </div>
+      <div className="flex flex-1 w-full">
+        {/* Mobile menu button - fixed position */}
+        <div className="lg:hidden fixed bottom-4 right-4 z-50">
           <Button
-            className="-mr-3"
-            variant="ghost"
+            size="icon"
+            className="h-14 w-14 rounded-full shadow-lg"
             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           >
             <Menu className="h-6 w-6" />
@@ -120,39 +117,56 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </Button>
         </div>
 
-        <div className="flex flex-1 overflow-hidden h-full">
-          {/* Sidebar */}
-          <aside
-            className={`w-64 bg-white lg:bg-gray-50 border-r border-gray-200 lg:block ${
-              isSidebarOpen ? 'block' : 'hidden'
-            } lg:relative absolute inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-              isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-            }`}
-          >
-            <nav className="h-full overflow-y-auto p-4">
-              {navItems.map((item) => {
-                const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
-                return (
-                  <Link key={item.href} href={item.href} passHref>
-                    <Button
-                      variant={isActive ? 'secondary' : 'ghost'}
-                      className={`shadow-none my-1 w-full justify-start ${
-                        isActive ? 'bg-gray-100' : ''
-                      }`}
-                      onClick={() => setIsSidebarOpen(false)}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      {item.label}
-                    </Button>
-                  </Link>
-                );
-              })}
-            </nav>
-          </aside>
+        {/* Sidebar overlay for mobile */}
+        {isSidebarOpen && (
+          <div
+            className="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
+            onClick={() => setIsSidebarOpen(false)}
+          />
+        )}
 
-          {/* Main content */}
-          <main className="flex-1 overflow-y-auto p-0 lg:p-4">{children}</main>
-        </div>
+        {/* Sidebar */}
+        <aside
+          className={`
+            w-64 bg-white lg:bg-gray-50/50 border-r border-border/50
+            lg:sticky lg:top-[73px] lg:h-[calc(100vh-73px)]
+            fixed inset-y-0 left-0 z-50
+            transform transition-transform duration-300 ease-in-out
+            lg:translate-x-0
+            ${
+              isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            }
+          `}
+        >
+          <nav className="h-full overflow-y-auto p-4 space-y-1">
+            {navItems.map((item) => {
+              const isActive = pathname === item.href || pathname?.startsWith(item.href + '/');
+              return (
+                <Link key={item.href} href={item.href} passHref>
+                  <Button
+                    variant={isActive ? 'secondary' : 'ghost'}
+                    className={`
+                      shadow-none w-full justify-start
+                      transition-all duration-200
+                      ${
+                        isActive
+                          ? 'bg-primary/10 text-primary border-l-4 border-primary pl-5'
+                          : 'hover:bg-secondary/80 hover:translate-x-1 hover:shadow-sm'
+                      }
+                    `}
+                    onClick={() => setIsSidebarOpen(false)}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    {item.label}
+                  </Button>
+                </Link>
+              );
+            })}
+          </nav>
+        </aside>
+
+        {/* Main content */}
+        <main className="flex-1 overflow-y-auto w-full">{children}</main>
       </div>
     </section>
   );

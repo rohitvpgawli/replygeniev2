@@ -133,7 +133,7 @@ pnpm install
 # Google OAuth
 GOOGLE_CLIENT_ID=<from step 1.M1>
 GOOGLE_CLIENT_SECRET=<from step 1.M1>
-GOOGLE_REDIRECT_URI=http://localhost:3000/api/google/oauth/callback
+GOOGLE_OAUTH_REDIRECT=http://localhost:3000/api/google/oauth/callback
 BASE_URL=http://localhost:3000
 
 # Database (already configured via docker-compose)

@@ -31,7 +31,7 @@ export default function SettingsLayout({
 
   return (
     <section className="flex-1 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
-      <div className="max-w-6xl mx-auto p-6 lg:p-12">
+      <div className="w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">
@@ -44,7 +44,7 @@ export default function SettingsLayout({
 
         {/* Tabs */}
         <div className="border-b border-border/50 mb-8">
-          <nav className="flex gap-6 -mb-px">
+          <nav className="flex gap-4 sm:gap-6 -mb-px overflow-x-auto">
             {tabs.map((tab) => {
               const isActive = pathname === tab.href;
               return (
@@ -52,11 +52,12 @@ export default function SettingsLayout({
                   key={tab.href}
                   href={tab.href}
                   className={`
-                    flex items-center gap-2 px-1 py-4 border-b-2 font-medium text-sm transition-colors
+                    flex items-center gap-2 px-1 py-4 border-b-2 font-medium text-sm 
+                    transition-all duration-200 whitespace-nowrap
                     ${
                       isActive
                         ? 'border-primary text-primary'
-                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300'
+                        : 'border-transparent text-muted-foreground hover:text-foreground hover:border-gray-300 hover:-translate-y-0.5'
                     }
                   `}
                 >

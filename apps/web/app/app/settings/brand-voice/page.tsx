@@ -76,7 +76,7 @@ export default function BrandVoicePage() {
   }
 
   return (
-    <div className="max-w-2xl">
+    <div className="w-full max-w-3xl">
       <div className="mb-6">
         <p className="text-muted-foreground">
           Customize how AI generates replies to match your business tone and style

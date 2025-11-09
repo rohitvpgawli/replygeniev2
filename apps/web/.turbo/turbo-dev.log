@@ -11,6 +11,219 @@
      [1m✓[22m clientSegmentCache
 
  [32m[1m✓[22m[39m Starting...
- [32m[1m✓[22m[39m Compiled middleware in 103ms
- [32m[1m✓[22m[39m Ready in 745ms
-[?25h
+ [32m[1m✓[22m[39m Compiled middleware in 105ms
+ [32m[1m✓[22m[39m Ready in 826ms
+ [37m[1m○[22m[39m Compiling /app/settings/integrations ...
+ GET /app/settings/integrations [32m200[39m in 460ms
+ [32m[1m✓[22m[39m Compiled /app/settings/integrations in 1924ms
+ [37m[1m○[22m[39m Compiling /api/v1/connection/status ...
+ [32m[1m✓[22m[39m Compiled /api/v1/connection/status in 506ms
+ GET /api/user [32m200[39m in 539ms
+ GET /api/v1/connection/status [32m200[39m in 568ms
+ [32m[1m✓[22m[39m Compiled /api/v1/locations in 200ms
+ GET /api/v1/locations [32m200[39m in 228ms
+ [32m[1m✓[22m[39m Compiled /api/google/oauth/start in 200ms
+ GET /api/google/oauth/start [34m307[39m in 226ms
+ [32m[1m✓[22m[39m Compiled /api/google/oauth/callback in 265ms
+ GET /api/google/oauth/callback?state=eyJ1c2VySWQiOjMsInRpbWVzdGFtcCI6MTc2MjcyNjM0MDU0M30%3D&code=4/0Ab32j90t-OsqrTK0RUbZ6wXgpfmRmx6LvA0ynM9PtNqxYhcRrYtAFaavhvzu4sUb0Yc22g&scope=email%20https://www.googleapis.com/auth/business.manage%20https://www.googleapis.com/auth/userinfo.email%20openid&authuser=0&hd=furtribe.in&prompt=consent [34m307[39m in 557ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 57ms
+ GET /api/v1/connection/status [32m200[39m in 33ms
+ GET /api/user [32m200[39m in 21ms
+ GET /api/v1/locations [32m200[39m in 26ms
+ GET /api/v1/connection/status [32m200[39m in 45ms
+ GET /api/v1/locations [32m200[39m in 22ms
+ GET /api/v1/connection/status [32m200[39m in 46ms
+ GET /api/v1/locations [32m200[39m in 23ms
+ [32m[1m✓[22m[39m Compiled /api/v1/locations/sync in 201ms
+Failed to fetch accounts: <!DOCTYPE html>
+<html lang=en>
+  <meta charset=utf-8>
+  <meta name=viewport content="initial-scale=1, minimum-scale=1, width=device-width">
+  <title>Error 404 (Not Found)!!1</title>
+  <style>
+    *{margin:0;padding:0}html,code{font:15px/22px arial,sans-serif}html{background:#fff;color:#222;padding:15px}body{margin:7% auto 0;max-width:390px;min-height:180px;padding:30px 0 15px}* > body{background:url(//www.google.com/images/errors/robot.png) 100% 5px no-repeat;padding-right:205px}p{margin:11px 0 22px;overflow:hidden}ins{color:#777;text-decoration:none}a img{border:0}@media screen and (max-width:772px){body{background:none;margin-top:0;max-width:none;padding-right:0}}#logo{background:url(//www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png) no-repeat;margin-left:-5px}@media only screen and (min-resolution:192dpi){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat 0% 0%/100% 100%;-moz-border-image:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) 0}}@media only screen and (-webkit-min-device-pixel-ratio:2){#logo{background:url(//www.google.com/images/branding/googlelogo/2x/googlelogo_color_150x54dp.png) no-repeat;-webkit-background-size:100% 100%}}#logo{display:inline-block;height:54px;width:150px}
+  </style>
+  <a href=//www.google.com/><span id=logo aria-label=Google></span></a>
+  <p><b>404.</b> <ins>That’s an error.</ins>
+  <p>The requested URL <code>/v4/accounts</code> was not found on this server.  <ins>That’s all we know.</ins>
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 404
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 497ms
+ [37m[1m○[22m[39m Compiling /_not-found/page ...
+ [32m[1m✓[22m[39m Compiled /_not-found/page in 544ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 579ms
+ GET /api/user [32m200[39m in 32ms
+ GET /api/user [32m200[39m in 50ms
+ GET /api/user [32m200[39m in 51ms
+ GET /api/user [32m200[39m in 51ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_limit_value": "0",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_unit": "1/min/{project}",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_location": "global",
+          "consumer": "projects/877956703499"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 459ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 93ms
+ GET /api/v1/connection/status [32m200[39m in 68ms
+ GET /api/user [32m200[39m in 47ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ [32m[1m✓[22m[39m Compiled /favicon.ico in 276ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 507ms
+ GET /api/v1/connection/status [32m200[39m in 29ms
+ GET /api/v1/locations [32m200[39m in 22ms
+ GET /api/google/oauth/start [34m307[39m in 20ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 79ms
+ GET /api/v1/connection/status [32m200[39m in 40ms
+ GET /api/user [32m200[39m in 21ms
+ GET /api/v1/locations [32m200[39m in 20ms
+ GET /api/v1/connection/status [32m200[39m in 44ms
+ GET /api/v1/locations [32m200[39m in 24ms
+ GET /api/v1/connection/status [32m200[39m in 54ms
+ GET /api/v1/locations [32m200[39m in 33ms
+ GET /app/settings/general [32m200[39m in 39ms
+ GET /api/v1/locations [32m200[39m in 44ms
+ [32m[1m✓[22m[39m Compiled /api/v1/settings/team-info in 224ms
+ GET /api/v1/settings/team-info [32m200[39m in 252ms
+ [37m[1m○[22m[39m Compiling /app/inbox ...
+ [32m[1m✓[22m[39m Compiled /app/inbox in 598ms
+ GET /app/inbox [32m200[39m in 627ms
+ GET /api/v1/locations [32m200[39m in 36ms
+ GET /app/inbox [32m200[39m in 21ms
+ [32m[1m✓[22m[39m Compiled /api/v1/reviews in 255ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 294ms
+ [37m[1m○[22m[39m Compiling /app/dashboard ...
+ [32m[1m✓[22m[39m Compiled /app/dashboard in 535ms
+ GET /app/dashboard [32m200[39m in 563ms
+ GET /app/dashboard [32m200[39m in 40ms
+ GET /api/v1/dashboard/stats [32m200[39m in 341ms
+ [32m[1m✓[22m[39m Compiled /api/v1/dashboard/stats in 341ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 367ms
+ POST /app/dashboard [32m200[39m in 57ms
+ GET /api/user [32m200[39m in 30ms
+ [32m[1m✓[22m[39m Compiled / in 410ms
+ GET / [32m200[39m in 447ms
+ GET / [32m200[39m in 26ms
+ [32m[1m✓[22m[39m Compiled /sign-up in 358ms
+ GET /sign-up [32m200[39m in 378ms
+ [32m[1m✓[22m[39m Compiled /api/auth/google/signin in 224ms
+ GET /api/auth/google/signin [34m307[39m in 241ms
+ GET /sign-up [32m200[39m in 83ms
+ GET / [32m200[39m in 57ms
+ [37m[1m○[22m[39m Compiling /sign-in ...
+ [32m[1m✓[22m[39m Compiled /sign-in in 526ms
+ GET /sign-in [32m200[39m in 562ms
+ GET /api/auth/google/signin [34m307[39m in 31ms
+ [32m[1m✓[22m[39m Compiled /api/auth/google/callback in 212ms
+ GET /api/auth/google/callback?state=eyJ0aW1lc3RhbXAiOjE3NjI3MjY3NDEwMzIsInR5cGUiOiJzaWduaW4ifQ%3D%3D&code=4%2F0Ab32j91_kQpuHUAMxY2DcrUuiLg2dbIROf4LymoXMfCBesbbY5dS5OD2B3BKWUvt7XtUTQ&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+openid&authuser=0&hd=furtribe.in&prompt=none [34m307[39m in 664ms
+ GET /app/dashboard [32m200[39m in 61ms
+ GET /api/v1/dashboard/stats [32m200[39m in 38ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 46ms
+ GET /api/user [32m200[39m in 26ms
+ [32m[1m✓[22m[39m Compiled /app/settings in 449ms
+ GET /app/settings [32m200[39m in 478ms
+ GET /app/settings/general [32m200[39m in 31ms
+ GET /app/settings/general [32m200[39m in 18ms
+ GET /api/v1/settings/team-info [32m200[39m in 35ms
+ GET /api/v1/locations [32m200[39m in 36ms
+ GET /app/dashboard [32m200[39m in 35ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 34ms
+ GET /api/v1/dashboard/stats [32m200[39m in 42ms
+ GET /api/user [32m200[39m in 60ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 70ms
+ GET /api/v1/dashboard/stats [32m200[39m in 78ms
+ GET /api/user [32m200[39m in 52ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 60ms
+ GET /api/v1/dashboard/stats [32m200[39m in 72ms
+ GET /api/user [32m200[39m in 41ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 48ms
+ GET /api/v1/dashboard/stats [32m200[39m in 56ms
+ [32m[1m✓[22m[39m Compiled in 232ms
+ [32m[1m✓[22m[39m Compiled /app/dashboard in 12ms
+ GET /app/dashboard [32m200[39m in 215ms
+ GET /app/dashboard [32m200[39m in 38ms
+ GET /app/dashboard [32m200[39m in 27ms
+ GET /app/dashboard [32m200[39m in 21ms
+ GET /app/dashboard [32m200[39m in 28ms
+ [32m[1m✓[22m[39m Compiled in 72ms
+ [32m[1m✓[22m[39m Compiled in 61ms
+ [32m[1m✓[22m[39m Compiled in 56ms
+ GET /api/user [32m200[39m in 115ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 123ms
+ GET /api/v1/dashboard/stats [32m200[39m in 172ms
+ [32m[1m✓[22m[39m Compiled /app/inbox in 28ms
+ GET /app/inbox [32m200[39m in 185ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 50ms
+ GET /api/v1/locations [32m200[39m in 50ms
+ [37m[1m○[22m[39m Compiling /app/activity ...
+ [32m[1m✓[22m[39m Compiled /app/activity in 873ms
+ GET /app/activity [32m200[39m in 942ms
+ [32m[1m✓[22m[39m Compiled /app/settings in 21ms
+ GET /app/settings [32m200[39m in 164ms
+ [32m[1m✓[22m[39m Compiled /app/settings/general in 8ms
+ GET /app/settings/general [32m200[39m in 33ms
+ GET /app/settings/general [32m200[39m in 22ms
+ GET /api/v1/locations [32m200[39m in 64ms
+ GET /api/v1/settings/team-info [32m200[39m in 67ms
+ [32m[1m✓[22m[39m Compiled /app/settings/integrations in 21ms
+ GET /app/settings/integrations [32m200[39m in 146ms
+ GET /api/v1/connection/status [32m200[39m in 30ms
+ GET /api/v1/connection/status [32m200[39m in 26ms
+ GET /api/v1/locations [32m200[39m in 28ms
+ GET /api/v1/locations [32m200[39m in 22ms
+ [32m[1m✓[22m[39m Compiled /app/settings/brand-voice in 485ms
+ GET /app/settings/brand-voice [32m200[39m in 520ms
+ [32m[1m✓[22m[39m Compiled /api/v1/brand-voice in 229ms
+ GET /api/v1/brand-voice [32m200[39m in 262ms
+ GET /app/settings/general [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 54ms
+ GET /api/v1/settings/team-info [32m200[39m in 57ms
+ GET /app/dashboard [32m200[39m in 155ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 37ms
+ GET /api/v1/dashboard/stats [32m200[39m in 41ms
+ GET /app/dashboard [32m200[39m in 38ms

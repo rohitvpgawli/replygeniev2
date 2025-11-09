@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     }
 
     const clientId = process.env.GOOGLE_CLIENT_ID;
-    const redirectUri = process.env.GOOGLE_REDIRECT_URI;
+    const redirectUri = process.env.GOOGLE_OAUTH_REDIRECT;
 
     if (!clientId || !redirectUri) {
       console.error('Missing Google OAuth configuration');

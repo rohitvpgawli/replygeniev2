@@ -83,7 +83,7 @@ export default function DashboardPage() {
 
   if (statsLoading || reviewsLoading) {
     return (
-      <section className="flex-1 p-6 lg:p-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
+      <section className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
         <div className="flex items-center justify-center h-64">
           <Loader2 className="size-8 animate-spin text-primary" />
         </div>
@@ -92,8 +92,8 @@ export default function DashboardPage() {
   }
 
   return (
-    <section className="flex-1 p-6 lg:p-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
-      <div className="max-w-7xl mx-auto">
+    <section className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
+      <div className="w-full">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-2">

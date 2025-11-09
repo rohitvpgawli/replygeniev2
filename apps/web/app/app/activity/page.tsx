@@ -72,11 +72,17 @@ export default async function ActivityPage() {
   const logs = await getActivityLogs();
 
   return (
-    <section className="flex-1 p-4 lg:p-8">
-      <h1 className="text-lg lg:text-2xl font-medium text-gray-900 mb-6">
-        Activity Log
-      </h1>
-      <Card>
+    <section className="flex-1 px-4 py-6 sm:px-6 sm:py-8 lg:px-8 lg:py-12 bg-gradient-to-b from-white to-gray-50/50 min-h-screen">
+      <div className="w-full max-w-5xl mx-auto">
+        <div className="mb-8">
+          <h1 className="text-3xl lg:text-4xl font-bold text-foreground mb-2">
+            Activity Log
+          </h1>
+          <p className="text-muted-foreground">
+            Track your recent account and team activities
+          </p>
+        </div>
+        <Card className="rounded-2xl border-border/50 shadow-sm">
         <CardHeader>
           <CardTitle>Recent Activity</CardTitle>
         </CardHeader>
@@ -121,6 +127,7 @@ export default async function ActivityPage() {
           )}
         </CardContent>
       </Card>
+      </div>
     </section>
   );
 }

@@ -50,7 +50,7 @@ interface GbpAccount {
  * Fetches all accounts accessible by the access token
  */
 export async function fetchAccounts(accessToken: string): Promise<GbpAccount[]> {
-  const response = await fetch(`${GBP_API_BASE}/accounts`, {
+  const response = await fetch(`${GBP_API_V1_BASE}/accounts`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
