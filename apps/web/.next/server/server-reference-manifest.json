@@ -1,47 +1,5 @@
 {
-  "node": {
-    "003e4ea74a851d197d25f62e5aae17ae924ba89509": {
-      "workers": {
-        "app/app/activity/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/activity/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/dashboard/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/dashboard/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/inbox/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/inbox/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/settings/brand-voice/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/settings/brand-voice/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/settings/general/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/settings/general/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/settings/integrations/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/settings/integrations/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        },
-        "app/app/settings/page": {
-          "moduleId": "[project]/apps/web/.next-internal/server/app/app/settings/page/actions.js { ACTIONS_MODULE0 => \"[project]/apps/web/app/(login)/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
-          "async": false
-        }
-      },
-      "layer": {
-        "app/app/activity/page": "action-browser",
-        "app/app/dashboard/page": "action-browser",
-        "app/app/inbox/page": "action-browser",
-        "app/app/settings/brand-voice/page": "action-browser",
-        "app/app/settings/general/page": "action-browser",
-        "app/app/settings/integrations/page": "action-browser",
-        "app/app/settings/page": "action-browser"
-      }
-    }
-  },
+  "node": {},
   "edge": {},
   "encryptionKey": "D0D3vmUWAgmjez/0GnuZrU4lyvIhzgWUKItR2VDTW0w="
 }

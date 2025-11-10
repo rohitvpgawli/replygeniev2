@@ -1304,3 +1304,83 @@ Error in locations sync endpoint: Error: Max retries exceeded
  GET /api/v1/connection/status [32m200[39m in 67ms
  GET /api/v1/locations [32m200[39m in 24ms
  GET /api/v1/debug/connection [32m200[39m in 379ms
+ [32m[1m✓[22m[39m Compiled middleware in 3ms
+ GET /app/inbox [32m200[39m in 338ms
+ GET /app/settings/integrations [32m200[39m in 339ms
+ GET /app/inbox [32m200[39m in 90ms
+ GET /app/settings/integrations [32m200[39m in 74ms
+ GET /api/user [32m200[39m in 134ms
+ GET /app/dashboard [32m200[39m in 48ms
+ GET /api/v1/dashboard/stats [32m200[39m in 88ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 92ms
+ [32m[1m✓[22m[39m Compiled middleware in 4ms
+ GET /app/inbox [32m200[39m in 268ms
+ GET /app/dashboard [32m200[39m in 269ms
+ GET /app/inbox [32m200[39m in 61ms
+ GET /app/dashboard [32m200[39m in 64ms
+ [32m[1m✓[22m[39m Compiled middleware in 4ms
+ [32m[1m✓[22m[39m Compiled in 0ms
+ GET /app/inbox [32m200[39m in 287ms
+ GET /app/dashboard [32m200[39m in 292ms
+ GET /app/dashboard [32m200[39m in 241ms
+ GET /app/inbox [32m200[39m in 242ms
+ [32m[1m✓[22m[39m Compiled in 272ms
+ GET /app/dashboard [32m200[39m in 348ms
+ GET /app/inbox [32m200[39m in 351ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 233ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 233ms
+ GET /api/v1/locations [32m200[39m in 240ms
+ GET /api/v1/dashboard/stats [32m200[39m in 250ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 301ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 218ms
+ [32m[1m✓[22m[39m Compiled middleware in 3ms
+ GET /app/dashboard [32m200[39m in 204ms
+ GET /app/inbox [32m200[39m in 206ms
+ GET /app/inbox [32m200[39m in 58ms
+ GET /app/dashboard [32m200[39m in 61ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled in 112ms
+ GET /app/dashboard [32m200[39m in 295ms
+ GET /app/inbox [32m200[39m in 294ms
+ GET /app/inbox [32m200[39m in 60ms
+ GET /app/dashboard [32m200[39m in 62ms
+ GET /api/user [32m200[39m in 166ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 167ms
+ GET /api/v1/dashboard/stats [32m200[39m in 170ms
+ [32m[1m✓[22m[39m Compiled /app/dashboard in 162ms
+ GET /app/inbox [32m200[39m in 583ms
+ GET /app/dashboard [32m200[39m in 608ms
+ GET /app/inbox [32m200[39m in 569ms
+ GET /app/dashboard [32m200[39m in 572ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 113ms
+ GET /api/v1/locations [32m200[39m in 118ms
+ GET /api/v1/dashboard/stats [32m200[39m in 111ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 119ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 315ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 222ms
+ [32m[1m✓[22m[39m Compiled in 69ms
+ GET /app/dashboard [32m200[39m in 92ms
+ GET /app/inbox [32m200[39m in 97ms
+ [32m[1m✓[22m[39m Compiled in 194ms
+ GET /app/inbox [32m200[39m in 89ms
+ GET /app/dashboard [32m200[39m in 83ms
+ [32m[1m✓[22m[39m Compiled in 152ms
+ GET /app/dashboard [32m200[39m in 82ms
+ GET /app/inbox [32m200[39m in 90ms
+ [32m[1m✓[22m[39m Compiled in 213ms
+ GET /app/dashboard [32m200[39m in 79ms
+ GET /app/inbox [32m200[39m in 82ms
+ [32m[1m✓[22m[39m Compiled in 264ms
+ GET /app/inbox [32m200[39m in 125ms
+ GET /app/dashboard [32m200[39m in 127ms
+ [32m[1m✓[22m[39m Compiled / in 35ms
+ GET / [32m200[39m in 424ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 250ms
+ [32m[1m✓[22m[39m Compiled in 177ms
+ [32m[1m✓[22m[39m Compiled in 128ms
+ [32m[1m✓[22m[39m Compiled in 175ms
+ [32m[1m✓[22m[39m Compiled / in 40ms
+ GET / [32m200[39m in 278ms
+ GET /app/dashboard [32m200[39m in 289ms
+ GET /app/inbox [32m200[39m in 290ms
+ GET / [32m200[39m in 266ms

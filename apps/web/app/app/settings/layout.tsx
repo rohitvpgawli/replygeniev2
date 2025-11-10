@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Building2, Plug, MessageSquare } from 'lucide-react';
+import { Building2, Plug, MessageSquare, Chrome } from 'lucide-react';
 
 export default function SettingsLayout({
   children,
@@ -26,6 +26,11 @@ export default function SettingsLayout({
       href: '/app/settings/brand-voice',
       label: 'Brand Voice',
       icon: MessageSquare,
+    },
+    {
+      href: '/app/settings/extension',
+      label: 'Extension',
+      icon: Chrome,
     },
   ];
 
