@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Loader2, Building2, MapPin, Phone, Globe, CheckCircle2, XCircle } from 'lucide-react';
 import useSWR from 'swr';
-import { RcLocation } from '@/lib/db/schema';
+import { RcLocation, RcUsage } from '@/lib/db/schema';
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -12,6 +12,14 @@ type TeamInfo = {
   name: string;
   createdAt: string;
   memberCount: number;
+  googleAccountName?: string;
+};
+
+type UsageInfo = {
+  draftsCount: number;
+  postsCount: number;
+  quotaLimit: number;
+  month: string;
 };
 
 export default function GeneralSettingsPage() {
@@ -23,8 +31,12 @@ export default function GeneralSettingsPage() {
     '/api/v1/locations',
     fetcher
   );
+  const { data: usage, isLoading: usageLoading } = useSWR<UsageInfo>(
+    '/api/v1/settings/usage',
+    fetcher
+  );
 
-  if (teamLoading || locationsLoading) {
+  if (teamLoading || locationsLoading || usageLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <Loader2 className="size-8 animate-spin text-primary" />
@@ -48,8 +60,13 @@ export default function GeneralSettingsPage() {
               Organization Name
             </label>
             <p className="text-lg font-semibold mt-1">
-              {teamInfo?.name || 'Not available'}
+              {teamInfo?.googleAccountName || teamInfo?.name || 'Not available'}
             </p>
+            {teamInfo?.googleAccountName && (
+              <p className="text-xs text-muted-foreground mt-1">
+                Synced from Google Business Profile
+              </p>
+            )}
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -177,14 +194,29 @@ export default function GeneralSettingsPage() {
           <CardTitle>Usage & Limits</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-muted-foreground">Monthly Reply Quota</span>
-              <span className="font-semibold">100 replies</span>
+          <div className="space-y-4">
+            <div>
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-sm font-medium text-muted-foreground">Monthly Draft Quota</span>
+                <span className="font-semibold">
+                  {usage?.draftsCount || 0} / {usage?.quotaLimit || 50} drafts
+                </span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div
+                  className="bg-primary h-2 rounded-full transition-all"
+                  style={{
+                    width: `${Math.min(((usage?.draftsCount || 0) / (usage?.quotaLimit || 50)) * 100, 100)}%`,
+                  }}
+                />
+              </div>
+              <p className="text-xs text-muted-foreground mt-1">
+                {usage?.month ? `Current period: ${new Date(usage.month + '-01').toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}` : 'No usage data'}
+              </p>
             </div>
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center pt-2 border-t border-border/50">
               <span className="text-sm text-muted-foreground">Plan</span>
-              <Badge variant="secondary">Free</Badge>
+              <Badge variant="secondary">Free (50 drafts/month)</Badge>
             </div>
           </div>
         </CardContent>

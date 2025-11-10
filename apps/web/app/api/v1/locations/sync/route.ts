@@ -62,8 +62,22 @@ export async function POST(request: NextRequest) {
     });
   } catch (error) {
     console.error('Error in locations sync endpoint:', error);
+    
+    // Provide helpful error messages
+    const errorMessage = error instanceof Error ? error.message : 'Internal server error';
+    
+    if (errorMessage.includes('429')) {
+      return NextResponse.json(
+        { 
+          error: 'Google API rate limit reached. Please wait a few minutes and try again.',
+          retryAfter: 60 // seconds
+        },
+        { status: 429 }
+      );
+    }
+    
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: errorMessage },
       { status: 500 }
     );
   }

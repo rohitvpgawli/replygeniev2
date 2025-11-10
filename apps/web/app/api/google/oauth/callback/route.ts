@@ -4,6 +4,8 @@ import { rcConnections, rcAuditLogs } from '@/lib/db/schema';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { encryptToken } from '@/lib/encryption';
 import { eq, and } from 'drizzle-orm';
+import { fetchAccounts } from '@/lib/google/gbp-client';
+import { syncLocations } from '@/lib/services/review-sync';
 
 const GOOGLE_TOKEN_URL = 'https://oauth2.googleapis.com/token';
 
@@ -180,6 +182,18 @@ export async function GET(request: NextRequest) {
         entityId: newConnection.id,
         metadata: { provider: 'google' },
       });
+    }
+
+    // Auto-sync locations after successful connection
+    try {
+      const accounts = await fetchAccounts(tokens.access_token);
+      if (accounts.length > 0) {
+        const accountId = accounts[0].name.split('/')[1];
+        await syncLocations(team.id, user.id, accountId);
+      }
+    } catch (syncError) {
+      console.error('Error auto-syncing locations:', syncError);
+      // Don't fail the OAuth flow if sync fails - user can manually sync later
     }
 
     // Redirect to integrations page with success message

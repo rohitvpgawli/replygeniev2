@@ -15,6 +15,13 @@
       "when": 1762650390149,
       "tag": "0001_rapid_kabuki",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1762742408454,
+      "tag": "0002_massive_gravity",
+      "breakpoints": true
     }
   ]
 }

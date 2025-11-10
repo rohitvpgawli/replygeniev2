@@ -47,10 +47,49 @@ interface GbpAccount {
 }
 
 /**
+ * Retry helper with exponential backoff
+ */
+async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  maxRetries: number = 3
+): Promise<Response> {
+  let lastError: Error | null = null;
+  
+  for (let attempt = 0; attempt < maxRetries; attempt++) {
+    try {
+      const response = await fetch(url, options);
+      
+      // If rate limited, wait and retry
+      if (response.status === 429) {
+        const retryAfter = response.headers.get('Retry-After');
+        const waitTime = retryAfter 
+          ? parseInt(retryAfter) * 1000 
+          : Math.min(1000 * Math.pow(2, attempt), 10000); // Max 10s
+        
+        console.log(`Rate limited. Waiting ${waitTime}ms before retry ${attempt + 1}/${maxRetries}`);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+        continue;
+      }
+      
+      return response;
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error('Unknown error');
+      if (attempt < maxRetries - 1) {
+        const waitTime = Math.min(1000 * Math.pow(2, attempt), 10000);
+        await new Promise(resolve => setTimeout(resolve, waitTime));
+      }
+    }
+  }
+  
+  throw lastError || new Error('Max retries exceeded');
+}
+
+/**
  * Fetches all accounts accessible by the access token
  */
 export async function fetchAccounts(accessToken: string): Promise<GbpAccount[]> {
-  const response = await fetch(`${GBP_API_V1_BASE}/accounts`, {
+  const response = await fetchWithRetry(`${GBP_API_V1_BASE}/accounts`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
@@ -73,7 +112,7 @@ export async function fetchLocations(
   accessToken: string,
   accountId: string
 ): Promise<GbpLocation[]> {
-  const response = await fetch(
+  const response = await fetchWithRetry(
     `${GBP_API_V1_BASE}/accounts/${accountId}/locations?readMask=name,title,phoneNumbers,websiteUri,storefrontAddress,metadata`,
     {
       headers: {
@@ -109,7 +148,7 @@ export async function fetchReviews(
     params.append('pageToken', pageToken);
   }
 
-  const response = await fetch(
+  const response = await fetchWithRetry(
     `${GBP_API_BASE}/${locationName}/reviews?${params.toString()}`,
     {
       headers: {

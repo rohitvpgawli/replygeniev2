@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@/lib/db/drizzle';
-import { rcDrafts, rcReviews, rcLocations, teams } from '@/lib/db/schema';
-import { eq, and } from 'drizzle-orm';
+import { rcDrafts, rcReviews, rcLocations, teams, rcUsage } from '@/lib/db/schema';
+import { eq, and, sql } from 'drizzle-orm';
 import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { generateDraft } from '@/lib/services/draft-generation';
 
@@ -32,6 +32,30 @@ export async function POST(
 
     const { reviewId } = await context.params;
     const reviewIdNum = parseInt(reviewId);
+
+    // Check draft quota before proceeding
+    const currentMonth = new Date().toISOString().slice(0, 7); // YYYY-MM
+    const usageData = await db
+      .select()
+      .from(rcUsage)
+      .where(
+        and(
+          eq(rcUsage.teamId, team.id),
+          eq(rcUsage.month, currentMonth)
+        )
+      )
+      .limit(1);
+
+    const usage = usageData[0];
+    if (usage && usage.draftsCount >= usage.quotaLimit) {
+      return NextResponse.json(
+        {
+          error: 'Monthly quota exceeded',
+          message: `You have reached your limit of ${usage.quotaLimit} drafts per month.`,
+        },
+        { status: 429 }
+      );
+    }
 
     // Fetch the review with location
     const reviewData = await db
@@ -117,6 +141,25 @@ export async function POST(
       .update(rcReviews)
       .set({ status: 'drafted', updatedAt: new Date() })
       .where(eq(rcReviews.id, reviewIdNum));
+
+    // Increment drafts count in usage
+    if (usage) {
+      await db
+        .update(rcUsage)
+        .set({
+          draftsCount: sql`${rcUsage.draftsCount} + 1`,
+          updatedAt: new Date(),
+        })
+        .where(eq(rcUsage.id, usage.id));
+    } else {
+      await db.insert(rcUsage).values({
+        teamId: team.id,
+        month: currentMonth,
+        draftsCount: 1,
+        postsCount: 0,
+        quotaLimit: 50,
+      });
+    }
 
     return NextResponse.json({
       draft: newDraft,

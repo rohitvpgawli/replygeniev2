@@ -186,7 +186,7 @@ export const rcUsage = pgTable('rc_usage', {
   month: varchar('month', { length: 7 }).notNull(), // YYYY-MM format
   postsCount: integer('posts_count').notNull().default(0),
   draftsCount: integer('drafts_count').notNull().default(0),
-  quotaLimit: integer('quota_limit').notNull().default(100),
+  quotaLimit: integer('quota_limit').notNull().default(50),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 }, (table) => ({

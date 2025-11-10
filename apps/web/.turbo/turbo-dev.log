@@ -227,3 +227,1080 @@ Error in locations sync endpoint: Error: Failed to fetch accounts: 429
  GET /api/v1/dashboard/recent-reviews [32m200[39m in 37ms
  GET /api/v1/dashboard/stats [32m200[39m in 41ms
  GET /app/dashboard [32m200[39m in 38ms
+ GET /api/user [32m200[39m in 121ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 136ms
+ GET /api/v1/dashboard/stats [32m200[39m in 176ms
+ GET /app/inbox [32m200[39m in 38ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 56ms
+ GET /api/v1/locations [32m200[39m in 58ms
+ GET /app/activity [32m200[39m in 53ms
+ GET /app/settings [32m200[39m in 43ms
+ GET /app/settings/general [32m200[39m in 58ms
+ GET /app/settings/general [32m200[39m in 21ms
+ GET /api/v1/settings/team-info [32m200[39m in 40ms
+ GET /app/activity [32m200[39m in 44ms
+ GET /app/dashboard [32m200[39m in 47ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 63ms
+ GET /api/v1/dashboard/stats [32m200[39m in 70ms
+ GET /api/user [32m200[39m in 77ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 88ms
+ GET /api/v1/dashboard/stats [32m200[39m in 108ms
+ GET /app/inbox [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 50ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 50ms
+ GET /api/v1/locations [32m200[39m in 92ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 85ms
+ GET /api/user [32m200[39m in 107ms
+ GET /app/activity [32m200[39m in 50ms
+ GET /app/settings [32m200[39m in 42ms
+ GET /app/settings/general [32m200[39m in 34ms
+ GET /app/settings/general [32m200[39m in 18ms
+ GET /api/v1/settings/team-info [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 41ms
+ GET /api/user [32m200[39m in 63ms
+ GET /api/v1/settings/team-info [32m200[39m in 71ms
+ GET /api/v1/locations [32m200[39m in 71ms
+ GET /api/user [32m200[39m in 71ms
+ GET /api/v1/locations [32m200[39m in 66ms
+ GET /api/v1/settings/team-info [32m200[39m in 69ms
+ GET /api/user [32m200[39m in 118ms
+ GET /api/v1/locations [32m200[39m in 117ms
+ GET /api/v1/settings/team-info [32m200[39m in 120ms
+ GET /app/settings/integrations [32m200[39m in 44ms
+ GET /api/v1/connection/status [32m200[39m in 41ms
+ GET /api/v1/connection/status [32m200[39m in 30ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ GET /app/settings/brand-voice [32m200[39m in 40ms
+ GET /api/v1/brand-voice [32m200[39m in 33ms
+ GET /api/user [32m200[39m in 47ms
+ GET /api/v1/brand-voice [32m200[39m in 53ms
+ GET /api/user [32m200[39m in 46ms
+ GET /api/v1/brand-voice [32m200[39m in 51ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ [32m[1m✓[22m[39m Compiled in 119ms
+ GET /api/user [32m200[39m in 204ms
+ GET /api/v1/brand-voice [32m200[39m in 213ms
+ POST /api/v1/brand-voice [32m200[39m in 76ms
+ GET /api/v1/brand-voice [32m200[39m in 40ms
+ [32m[1m✓[22m[39m Compiled /app/activity in 17ms
+ GET /app/activity [32m200[39m in 209ms
+ [32m[1m✓[22m[39m Compiled /app/settings in 13ms
+ GET /app/settings [32m200[39m in 53ms
+ [32m[1m✓[22m[39m Compiled /app/settings/general in 12ms
+ GET /app/settings/general [32m200[39m in 150ms
+ GET /app/settings/general [32m200[39m in 19ms
+ GET /api/v1/locations [32m200[39m in 181ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_unit": "1/min/{project}",
+          "quota_limit_value": "0",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_location": "global",
+          "consumer": "projects/877956703499"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 1242ms
+ [32m[1m✓[22m[39m Compiled /app/settings/brand-voice in 9ms
+ GET /app/settings/brand-voice [32m200[39m in 38ms
+ GET /api/v1/brand-voice [32m200[39m in 26ms
+ [32m[1m✓[22m[39m Compiled /app/dashboard in 12ms
+ GET /app/dashboard [32m200[39m in 65ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 156ms
+ GET /api/v1/dashboard/stats [32m200[39m in 157ms
+ GET /app/dashboard [32m200[39m in 39ms
+ [32m[1m✓[22m[39m Compiled /app/inbox in 12ms
+ GET /app/inbox [32m200[39m in 54ms
+ GET /api/v1/locations [32m200[39m in 137ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 182ms
+ GET /api/v1/reviews?locationId=all&rating=5&status=all [32m200[39m in 29ms
+ GET /api/v1/reviews?locationId=all&rating=3&status=all [32m200[39m in 37ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 31ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=drafted [32m200[39m in 41ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 30ms
+ GET /api/user [32m200[39m in 102ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 82ms
+ GET /api/v1/locations [32m200[39m in 88ms
+ GET /app/dashboard [32m200[39m in 41ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 61ms
+ GET /api/v1/dashboard/stats [32m200[39m in 64ms
+ GET /app/settings [32m200[39m in 44ms
+ GET /app/settings/general [32m200[39m in 35ms
+ GET /app/settings/general [32m200[39m in 22ms
+ GET /api/v1/locations [32m200[39m in 45ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_location": "global",
+          "consumer": "projects/877956703499",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_limit_value": "0",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_unit": "1/min/{project}"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 589ms
+ GET /app/settings/general [32m200[39m in 206ms
+ GET /api/v1/locations [32m200[39m in 81ms
+ GET /api/user [32m200[39m in 54ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 282ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_location": "global",
+          "quota_unit": "1/min/{project}",
+          "quota_limit_value": "0",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "consumer": "projects/877956703499"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 353ms
+ [32m[1m✓[22m[39m Compiled /api/v1/settings/usage in 458ms
+ GET /api/v1/settings/usage [32m200[39m in 510ms
+ [32m[1m✓[22m[39m Compiled /app/settings/integrations in 13ms
+ GET /app/settings/integrations [32m200[39m in 55ms
+ GET /api/v1/connection/status [32m200[39m in 142ms
+ GET /api/v1/connection/status [32m200[39m in 32ms
+ GET /api/v1/locations [32m200[39m in 33ms
+ GET /api/v1/locations [32m200[39m in 25ms
+ GET /api/v1/connection/status [32m200[39m in 48ms
+ GET /api/v1/locations [32m200[39m in 24ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_location": "global",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "consumer": "projects/877956703499",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_unit": "1/min/{project}",
+          "quota_limit_value": "0",
+          "service": "mybusinessaccountmanagement.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 829ms
+ GET /api/google/oauth/start [34m307[39m in 130ms
+ GET /api/google/oauth/callback?state=eyJ1c2VySWQiOjMsInRpbWVzdGFtcCI6MTc2Mjc0MjU4Nzk3N30%3D&code=4/0Ab32j93ZhhyUXYWHVocguVNQhVTew093YqujarHVwrRtenfHmb_AAE_JK6NWHfSsaKhuwQ&scope=email%20https://www.googleapis.com/auth/business.manage%20https://www.googleapis.com/auth/userinfo.email%20openid&authuser=0&hd=furtribe.in&prompt=consent [34m307[39m in 396ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 79ms
+ GET /api/v1/connection/status [32m200[39m in 36ms
+ GET /api/user [32m200[39m in 23ms
+ GET /api/v1/locations [32m200[39m in 29ms
+ GET /app/settings/general [32m200[39m in 42ms
+ GET /api/v1/settings/usage [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 42ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 325ms
+ GET /api/user [32m200[39m in 62ms
+ GET /api/v1/locations [32m200[39m in 65ms
+ GET /api/v1/settings/usage [32m200[39m in 68ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 314ms
+ GET /api/user [32m200[39m in 116ms
+ GET /api/v1/locations [32m200[39m in 98ms
+ GET /api/v1/settings/usage [32m200[39m in 96ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 349ms
+ GET /app/activity [32m200[39m in 58ms
+ GET /app/settings [32m200[39m in 41ms
+ GET /app/settings/general [32m200[39m in 36ms
+ GET /app/settings/general [32m200[39m in 20ms
+ GET /api/v1/settings/usage [32m200[39m in 52ms
+ GET /api/v1/locations [32m200[39m in 54ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 191ms
+ GET /app/settings/integrations [32m200[39m in 43ms
+ GET /api/v1/connection/status [32m200[39m in 38ms
+ GET /api/v1/connection/status [32m200[39m in 28ms
+ GET /api/v1/locations [32m200[39m in 30ms
+ GET /api/v1/locations [32m200[39m in 20ms
+ GET /api/v1/connection/status [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 22ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_location": "global",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_unit": "1/min/{project}",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_limit_value": "0",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "consumer": "projects/877956703499"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 216ms
+ [32m[1m✓[22m[39m Compiled /_not-found/page in 29ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 62ms
+ GET /api/v1/locations/sync [33m405[39m in 29ms
+ GET /api/user [32m200[39m in 63ms
+ GET /api/user [32m200[39m in 46ms
+ GET /app/settings/general [32m200[39m in 34ms
+ GET /api/v1/locations [32m200[39m in 75ms
+ GET /api/v1/settings/usage [32m200[39m in 76ms
+ GET /app/settings/general [32m200[39m in 28ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 284ms
+ GET /app/settings/brand-voice [32m200[39m in 37ms
+ GET /app/settings/brand-voice [32m200[39m in 31ms
+ GET /app/settings/brand-voice [32m200[39m in 35ms
+ GET /api/v1/brand-voice [32m200[39m in 38ms
+ GET /app/dashboard [32m200[39m in 32ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 51ms
+ GET /api/v1/dashboard/stats [32m200[39m in 59ms
+ GET /app/settings/integrations [32m200[39m in 43ms
+ GET /api/v1/connection/status [32m200[39m in 44ms
+ GET /api/v1/connection/status [32m200[39m in 52ms
+ GET /api/v1/locations [32m200[39m in 51ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ GET /api/user [32m200[39m in 53ms
+ GET /app/inbox [32m200[39m in 43ms
+ GET /api/v1/locations [32m200[39m in 57ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 60ms
+ GET /api/user [32m200[39m in 33ms
+ GET /api/user [32m200[39m in 97ms
+ GET /api/v1/locations [32m200[39m in 88ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 90ms
+ POST /app/inbox [32m200[39m in 62ms
+ [32m[1m✓[22m[39m Compiled / in 14ms
+ GET /api/user [32m200[39m in 26ms
+ GET / [32m200[39m in 54ms
+ GET / [32m200[39m in 28ms
+ [32m[1m✓[22m[39m Compiled /sign-up in 19ms
+ GET /sign-up [32m200[39m in 46ms
+ GET /api/auth/google/signin [34m307[39m in 47ms
+ GET / [32m200[39m in 142ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 228ms
+ GET /sign-up [32m200[39m in 42ms
+ GET /api/auth/google/signin [34m307[39m in 33ms
+ GET /api/auth/google/callback?state=eyJ0aW1lc3RhbXAiOjE3NjI3NDI5OTEwNDQsInR5cGUiOiJzaWduaW4ifQ%3D%3D&code=4%2F0Ab32j93kvL5cFN5jZmNCq9dX3PX0hyJsez2aqyRNesndG0LyI-gWrDNCzxjW5a2ftBecIA&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent [34m307[39m in 639ms
+ GET /app/dashboard [32m200[39m in 79ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 48ms
+ GET /api/user [32m200[39m in 29ms
+ GET /api/v1/dashboard/stats [32m200[39m in 53ms
+ GET /app/inbox [32m200[39m in 41ms
+ GET /api/v1/locations [32m200[39m in 39ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 39ms
+ GET /app/activity [32m200[39m in 47ms
+ GET /app/settings [32m200[39m in 32ms
+ GET /app/settings/general [32m200[39m in 31ms
+ GET /app/settings/general [32m200[39m in 25ms
+ GET /api/v1/locations [32m200[39m in 40ms
+ GET /api/v1/settings/usage [32m200[39m in 41ms
+ GET /api/v1/settings/team-info [32m200[39m in 46ms
+ GET /app/settings/integrations [32m200[39m in 34ms
+ GET /api/v1/connection/status [32m200[39m in 33ms
+ GET /api/v1/connection/status [32m200[39m in 31ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ GET /api/v1/locations [32m200[39m in 19ms
+ GET /api/google/oauth/start [34m307[39m in 37ms
+ GET /api/google/oauth/callback?state=eyJ1c2VySWQiOjQsInRpbWVzdGFtcCI6MTc2Mjc0MzAwNDM0OH0%3D&code=4/0Ab32j91ZBhDyIuebbeUIz9Fv-JMMzEX5U0AXH6u_w77wA4hlKHypVofrYxB_f9rCXOt1XQ&scope=email%20https://www.googleapis.com/auth/business.manage%20https://www.googleapis.com/auth/userinfo.email%20openid&authuser=0&prompt=consent [34m307[39m in 294ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 53ms
+ GET /api/v1/connection/status [32m200[39m in 33ms
+ GET /api/user [32m200[39m in 25ms
+ GET /api/v1/locations [32m200[39m in 26ms
+ GET /api/v1/connection/status [32m200[39m in 39ms
+ GET /api/v1/locations [32m200[39m in 23ms
+ GET /app/inbox [32m200[39m in 40ms
+ GET /api/v1/locations [32m200[39m in 36ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 35ms
+ GET /app/inbox [32m200[39m in 93ms
+ GET /api/v1/locations [32m200[39m in 46ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 48ms
+ GET /api/user [32m200[39m in 31ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 240ms
+ GET /api/user [32m200[39m in 60ms
+ GET /api/v1/locations [32m200[39m in 71ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 69ms
+ GET /app/activity [32m200[39m in 53ms
+ GET /app/settings [32m200[39m in 41ms
+ GET /app/settings/general [32m200[39m in 34ms
+ GET /app/settings/general [32m200[39m in 24ms
+ GET /api/v1/locations [32m200[39m in 40ms
+ GET /api/v1/settings/usage [32m200[39m in 40ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 385ms
+ GET /app/settings/integrations [32m200[39m in 42ms
+ GET /api/v1/connection/status [32m200[39m in 27ms
+ GET /api/v1/connection/status [32m200[39m in 29ms
+ GET /api/v1/locations [32m200[39m in 29ms
+ GET /api/v1/locations [32m200[39m in 22ms
+ GET /app/settings/general [32m200[39m in 40ms
+ GET /api/v1/settings/usage [32m200[39m in 43ms
+ GET /api/v1/locations [32m200[39m in 45ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 141ms
+ GET /api/user [32m200[39m in 105ms
+ GET /api/v1/locations [32m200[39m in 137ms
+ GET /api/v1/settings/usage [32m200[39m in 107ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 611ms
+ GET /api/user [32m200[39m in 70ms
+ GET /api/v1/locations [32m200[39m in 78ms
+ GET /api/v1/settings/usage [32m200[39m in 72ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 274ms
+ GET /api/user [32m200[39m in 90ms
+ GET /api/v1/locations [32m200[39m in 122ms
+ GET /api/v1/settings/usage [32m200[39m in 73ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 258ms
+ GET /app/inbox [32m200[39m in 79ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 25ms
+ GET /api/user [32m200[39m in 101ms
+ GET /api/v1/locations [32m200[39m in 128ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 114ms
+ GET /api/user [32m200[39m in 57ms
+ GET /api/v1/locations [32m200[39m in 61ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 62ms
+ GET /app/settings [32m200[39m in 48ms
+ GET /app/settings/general [32m200[39m in 29ms
+ GET /app/settings/general [32m200[39m in 21ms
+ GET /api/v1/locations [32m200[39m in 39ms
+ GET /api/v1/settings/usage [32m200[39m in 39ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 372ms
+ GET /app/settings/integrations [32m200[39m in 44ms
+ GET /api/v1/connection/status [32m200[39m in 31ms
+ GET /api/v1/connection/status [32m200[39m in 26ms
+ GET /api/v1/locations [32m200[39m in 27ms
+ GET /api/v1/locations [32m200[39m in 23ms
+ GET /api/v1/connection/status [32m200[39m in 47ms
+ GET /api/v1/locations [32m200[39m in 25ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_limit_value": "0",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_unit": "1/min/{project}",
+          "quota_location": "global",
+          "consumer": "projects/877956703499",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 240ms
+ GET /api/user [32m200[39m in 109ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_unit": "1/min/{project}",
+          "quota_limit_value": "0",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_location": "global",
+          "consumer": "projects/877956703499",
+          "service": "mybusinessaccountmanagement.googleapis.com"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 382ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 164ms
+ GET /api/user [32m200[39m in 151ms
+ GET /api/google/oauth/start [34m307[39m in 45ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "consumer": "projects/877956703499",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "quota_location": "global",
+          "quota_unit": "1/min/{project}",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_limit_value": "0",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error auto-syncing locations: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/google/oauth/callback/route.ts:189:23)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/google/oauth/callback?state=eyJ1c2VySWQiOjQsInRpbWVzdGFtcCI6MTc2Mjc0MzI5MDEwNX0%3D&code=4/0Ab32j93pEtgd9n5mOe7v7KKcHked73K44ZLe6rxndDzg69xryU0iF4SYoA-yAIL7UWpKcQ&scope=email%20https://www.googleapis.com/auth/business.manage%20https://www.googleapis.com/auth/userinfo.email%20openid&authuser=0&prompt=consent [34m307[39m in 819ms
+ GET /app/settings/integrations?success=connected [32m200[39m in 92ms
+ GET /api/v1/connection/status [32m200[39m in 38ms
+ GET /api/user [32m200[39m in 28ms
+ GET /api/v1/locations [32m200[39m in 32ms
+ GET /app/settings/general [32m200[39m in 40ms
+ GET /api/v1/locations [32m200[39m in 42ms
+ GET /api/v1/settings/usage [32m200[39m in 43ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 143ms
+ GET /app/settings/general [32m200[39m in 98ms
+ GET /api/user [32m200[39m in 46ms
+ GET /api/v1/settings/usage [32m200[39m in 60ms
+ GET /api/v1/locations [32m200[39m in 61ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 189ms
+ GET /favicon.ico?favicon.45db1c09.ico [32m200[39m in 251ms
+ GET /app/settings/integrations [32m200[39m in 41ms
+ GET /api/v1/connection/status [32m200[39m in 26ms
+ GET /api/v1/connection/status [32m200[39m in 27ms
+ GET /api/v1/locations [32m200[39m in 29ms
+ GET /api/v1/locations [32m200[39m in 22ms
+ GET /app/settings/brand-voice [32m200[39m in 39ms
+ GET /api/v1/brand-voice [32m200[39m in 29ms
+ GET /app/inbox [32m200[39m in 40ms
+ GET /api/v1/locations [32m200[39m in 32ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 39ms
+ [32m[1m✓[22m[39m Compiled middleware in 1ms
+ GET /app/inbox [32m200[39m in 137ms
+ GET /app/inbox [32m200[39m in 35ms
+ GET /api/user [32m200[39m in 203ms
+ GET /api/v1/locations [32m200[39m in 226ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 214ms
+ [37m[1m○[22m[39m Compiling /api/v1/debug/connection ...
+ [32m[1m✓[22m[39m Compiled /api/v1/debug/connection in 833ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_limit_value": "0",
+          "quota_limit": "DefaultRequestsPerMinutePerProject",
+          "consumer": "projects/877956703499",
+          "quota_unit": "1/min/{project}",
+          "quota_location": "global",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+ GET /api/v1/debug/connection [32m200[39m in 1072ms
+ GET /favicon.ico [32m200[39m in 244ms
+ GET /api/v1/locations [32m200[39m in 73ms
+ GET /api/user [32m200[39m in 75ms
+ GET /api/v1/locations [32m200[39m in 86ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 66ms
+ GET / [32m200[39m in 181ms
+ GET /sign-up [32m200[39m in 42ms
+ GET /api/auth/google/signin [34m307[39m in 56ms
+ GET /api/auth/google/callback?state=eyJ0aW1lc3RhbXAiOjE3NjI3NDM0NTgzMTQsInR5cGUiOiJzaWduaW4ifQ%3D%3D&code=4%2F0Ab32j938SZNvRkMsFp5DY8auotD0cKEf1OOK0_RgfSH7Esj-1qObMPjfaodu4o6m08NB4A&scope=email+profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.profile+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=none [34m307[39m in 557ms
+ GET /app/dashboard [32m200[39m in 113ms
+ GET /api/user [32m200[39m in 56ms
+ GET /api/v1/dashboard/recent-reviews [32m200[39m in 70ms
+ GET /api/v1/dashboard/stats [32m200[39m in 74ms
+ GET /app/activity [32m200[39m in 87ms
+ GET /app/settings [32m200[39m in 66ms
+ GET /app/settings/general [32m200[39m in 78ms
+ GET /app/settings/general [32m200[39m in 29ms
+ GET /api/v1/locations [32m200[39m in 118ms
+ GET /api/v1/settings/usage [32m200[39m in 124ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 447ms
+ GET /app/settings/integrations [32m200[39m in 47ms
+ GET /api/v1/connection/status [32m200[39m in 34ms
+ GET /api/v1/locations [32m200[39m in 31ms
+ GET /api/v1/connection/status [32m200[39m in 33ms
+ GET /api/v1/locations [32m200[39m in 24ms
+ GET /app/inbox [32m200[39m in 34ms
+ GET /api/v1/locations [32m200[39m in 32ms
+ GET /api/v1/reviews?locationId=all&rating=all&status=all [32m200[39m in 39ms
+ GET /app/settings [32m200[39m in 40ms
+ GET /app/settings/general [32m200[39m in 35ms
+ GET /app/settings/general [32m200[39m in 31ms
+ GET /api/v1/settings/usage [32m200[39m in 44ms
+ GET /api/v1/locations [32m200[39m in 46ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 401,
+    "message": "Request had invalid authentication credentials. Expected OAuth 2 access token, login cookie or other valid authentication credential. See https://developers.google.com/identity/sign-in/web/devconsole-project.",
+    "status": "UNAUTHENTICATED"
+  }
+}
+
+Error fetching Google account name: Error: Failed to fetch accounts: 401
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async GET (app/api/v1/settings/team-info/route.ts:65:27)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ GET /api/v1/settings/team-info [32m200[39m in 327ms
+ GET /app/settings/integrations [32m200[39m in 56ms
+ GET /api/v1/connection/status [32m200[39m in 33ms
+ GET /api/v1/connection/status [32m200[39m in 48ms
+ GET /api/v1/locations [32m200[39m in 49ms
+ GET /api/v1/locations [32m200[39m in 49ms
+ GET /api/user [32m200[39m in 122ms
+Failed to fetch accounts: {
+  "error": {
+    "code": 429,
+    "message": "Quota exceeded for quota metric 'Requests' and limit 'Requests per minute' of service 'mybusinessaccountmanagement.googleapis.com' for consumer 'project_number:877956703499'.",
+    "status": "RESOURCE_EXHAUSTED",
+    "details": [
+      {
+        "@type": "type.googleapis.com/google.rpc.ErrorInfo",
+        "reason": "RATE_LIMIT_EXCEEDED",
+        "domain": "googleapis.com",
+        "metadata": {
+          "quota_unit": "1/min/{project}",
+          "consumer": "projects/877956703499",
+          "quota_metric": "mybusinessaccountmanagement.googleapis.com/default_requests",
+          "quota_location": "global",
+          "quota_limit_value": "0",
+          "service": "mybusinessaccountmanagement.googleapis.com",
+          "quota_limit": "DefaultRequestsPerMinutePerProject"
+        }
+      },
+      {
+        "@type": "type.googleapis.com/google.rpc.Help",
+        "links": [
+          {
+            "description": "Request a higher quota limit.",
+            "url": "https://cloud.google.com/docs/quotas/help/request_increase"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+Error in locations sync endpoint: Error: Failed to fetch accounts: 429
+    at fetchAccounts (lib/google/gbp-client.ts:62:10)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 60 |[39m     [36mconst[39m error [33m=[39m [36mawait[39m response[33m.[39mtext()[33m;[39m
+ [90m 61 |[39m     console[33m.[39merror([32m'Failed to fetch accounts:'[39m[33m,[39m error)[33m;[39m
+[31m[1m>[22m[39m[90m 62 |[39m     [36mthrow[39m [36mnew[39m [33mError[39m([32m`Failed to fetch accounts: ${response.status}`[39m)[33m;[39m
+ [90m    |[39m          [31m[1m^[22m[39m
+ [90m 63 |[39m   }
+ [90m 64 |[39m
+ [90m 65 |[39m   [36mconst[39m data [33m=[39m [36mawait[39m response[33m.[39mjson()[33m;[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 308ms
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 65ms
+ GET /api/user [32m200[39m in 138ms
+ GET /api/user [32m200[39m in 122ms
+ GET /api/user [32m200[39m in 83ms
+ GET /api/user [32m200[39m in 56ms
+Rate limited. Waiting 1000ms before retry 1/3
+Rate limited. Waiting 2000ms before retry 2/3
+Rate limited. Waiting 4000ms before retry 3/3
+ GET /api/v1/debug/connection [32m200[39m in 7538ms
+ GET /api/user [33m404[39m in 92ms
+Rate limited. Waiting 1000ms before retry 1/3
+Rate limited. Waiting 2000ms before retry 2/3
+ GET /.well-known/appspecific/com.chrome.devtools.json [33m404[39m in 256ms
+Rate limited. Waiting 4000ms before retry 3/3
+Error in locations sync endpoint: Error: Max retries exceeded
+    at fetchWithRetry (lib/google/gbp-client.ts:85:21)
+    at async fetchAccounts (lib/google/gbp-client.ts:92:19)
+    at async POST (app/api/v1/locations/sync/route.ts:37:21)
+[0m [90m 83 |[39m   }
+ [90m 84 |[39m   
+[31m[1m>[22m[39m[90m 85 |[39m   [36mthrow[39m lastError [33m||[39m [36mnew[39m [33mError[39m([32m'Max retries exceeded'[39m)[33m;[39m
+ [90m    |[39m                     [31m[1m^[22m[39m
+ [90m 86 |[39m }
+ [90m 87 |[39m
+ [90m 88 |[39m [90m/**[39m[0m
+ POST /api/v1/locations/sync [31m500[39m in 8044ms
+ GET /api/user [32m200[39m in 76ms
+ GET /api/user [32m200[39m in 36ms
+ GET /api/user [32m200[39m in 106ms
+ GET /app/settings/integrations [32m200[39m in 110ms
+ GET /api/user [32m200[39m in 32ms
+ GET /api/v1/connection/status [32m200[39m in 67ms
+ GET /api/v1/locations [32m200[39m in 24ms
+ GET /api/v1/debug/connection [32m200[39m in 379ms

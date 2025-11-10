@@ -1,0 +1,1 @@
+ALTER TABLE "rc_usage" ALTER COLUMN "quota_limit" SET DEFAULT 50;

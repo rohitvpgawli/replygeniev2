@@ -320,7 +320,7 @@ const rcUsage = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules
     }).notNull(),
     postsCount: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$integer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["integer"])('posts_count').notNull().default(0),
     draftsCount: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$integer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["integer"])('drafts_count').notNull().default(0),
-    quotaLimit: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$integer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["integer"])('quota_limit').notNull().default(100),
+    quotaLimit: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$integer$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["integer"])('quota_limit').notNull().default(50),
     createdAt: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["timestamp"])('created_at').notNull().defaultNow(),
     updatedAt: (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$drizzle$2d$orm$40$0$2e$43$2e$1_postgres$40$3$2e$4$2e$7$2f$node_modules$2f$drizzle$2d$orm$2f$pg$2d$core$2f$columns$2f$timestamp$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["timestamp"])('updated_at').notNull().defaultNow()
 }, (table)=>({
@@ -632,8 +632,34 @@ async function getTeamForUser() {
 });
 const GBP_API_BASE = 'https://mybusiness.googleapis.com/v4';
 const GBP_API_V1_BASE = 'https://mybusinessbusinessinformation.googleapis.com/v1';
+/**
+ * Retry helper with exponential backoff
+ */ async function fetchWithRetry(url, options, maxRetries = 3) {
+    let lastError = null;
+    for(let attempt = 0; attempt < maxRetries; attempt++){
+        try {
+            const response = await fetch(url, options);
+            // If rate limited, wait and retry
+            if (response.status === 429) {
+                const retryAfter = response.headers.get('Retry-After');
+                const waitTime = retryAfter ? parseInt(retryAfter) * 1000 : Math.min(1000 * Math.pow(2, attempt), 10000); // Max 10s
+                console.log(`Rate limited. Waiting ${waitTime}ms before retry ${attempt + 1}/${maxRetries}`);
+                await new Promise((resolve)=>setTimeout(resolve, waitTime));
+                continue;
+            }
+            return response;
+        } catch (error) {
+            lastError = error instanceof Error ? error : new Error('Unknown error');
+            if (attempt < maxRetries - 1) {
+                const waitTime = Math.min(1000 * Math.pow(2, attempt), 10000);
+                await new Promise((resolve)=>setTimeout(resolve, waitTime));
+            }
+        }
+    }
+    throw lastError || new Error('Max retries exceeded');
+}
 async function fetchAccounts(accessToken) {
-    const response = await fetch(`${GBP_API_V1_BASE}/accounts`, {
+    const response = await fetchWithRetry(`${GBP_API_V1_BASE}/accounts`, {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
@@ -647,7 +673,7 @@ async function fetchAccounts(accessToken) {
     return data.accounts || [];
 }
 async function fetchLocations(accessToken, accountId) {
-    const response = await fetch(`${GBP_API_V1_BASE}/accounts/${accountId}/locations?readMask=name,title,phoneNumbers,websiteUri,storefrontAddress,metadata`, {
+    const response = await fetchWithRetry(`${GBP_API_V1_BASE}/accounts/${accountId}/locations?readMask=name,title,phoneNumbers,websiteUri,storefrontAddress,metadata`, {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
@@ -667,7 +693,7 @@ async function fetchReviews(accessToken, locationName, pageSize = 50, pageToken)
     if (pageToken) {
         params.append('pageToken', pageToken);
     }
-    const response = await fetch(`${GBP_API_BASE}/${locationName}/reviews?${params.toString()}`, {
+    const response = await fetchWithRetry(`${GBP_API_BASE}/${locationName}/reviews?${params.toString()}`, {
         headers: {
             Authorization: `Bearer ${accessToken}`
         }
@@ -1204,8 +1230,18 @@ async function POST(request) {
         });
     } catch (error) {
         console.error('Error in locations sync endpoint:', error);
+        // Provide helpful error messages
+        const errorMessage = error instanceof Error ? error.message : 'Internal server error';
+        if (errorMessage.includes('429')) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react$2d$dom$40$19$2e$1$2e$0_react$40$19$2e$1$2e$0_$5f$react$40$19$2e$1$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: 'Google API rate limit reached. Please wait a few minutes and try again.',
+                retryAfter: 60 // seconds
+            }, {
+                status: 429
+            });
+        }
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$15$2e$4$2e$0$2d$canary$2e$47_react$2d$dom$40$19$2e$1$2e$0_react$40$19$2e$1$2e$0_$5f$react$40$19$2e$1$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
-            error: 'Internal server error'
+            error: errorMessage
         }, {
             status: 500
         });

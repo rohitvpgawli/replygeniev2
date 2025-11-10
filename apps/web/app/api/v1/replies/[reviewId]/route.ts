@@ -181,7 +181,7 @@ export async function POST(
           month: currentMonth,
           postsCount: 1,
           draftsCount: 0,
-          quotaLimit: 100,
+          quotaLimit: 50,
         });
       }
 
