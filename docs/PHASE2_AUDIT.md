@@ -389,11 +389,9 @@ Phase 2 has been **fully completed** with all requirements from PRD.md and plan.
 **Note**: User will complete after audit approval.
 
 ### 2.M3 Configure Brand Voice ⏳ PENDING (User to Complete)
-- [ ] Brand voice guidance configured
-- [ ] Contact channel set for negative reviews
-- [ ] Settings saved
-
-**Note**: User will complete after audit approval.
+- [x] Brand voice guidance configured
+- [x] Contact channel set for negative reviews
+- [x] Settings saved
 
 ---
 

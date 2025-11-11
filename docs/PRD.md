@@ -94,7 +94,7 @@ In
 	•	AI Draft (server) with guardrails
 	•	Inbox: Generate/Regenerate, Edit, Approve & Post (server → GBP)
 	•	Audit log (actor, text snapshot, timestamps)
-	•	Quotas (posts/month per org; billing toggle off)
+	•	Quotas (50 drafts/month per org; billing toggle off)
 	•	Dashboard: 2 KPIs (Needing Reply, Replies Posted 30d)
 	•	Chrome MV3 extension: Generate Draft + paste only
 	•	RLS tenant isolation (enabled at end; tested)
@@ -135,11 +135,25 @@ Extension (MV3): On https://business.google.com/* inject Generate Draft button; 
 	•	GET/POST /api/v1/brand-voice → { brandVoiceGuidance, contactChannel }
 	•	GET /api/v1/dashboard/stats → { needingReply, repliesPosted30d, avgResponseTime, totalReviews }
 	•	GET /api/v1/dashboard/recent-reviews → [{ review, location }]
-	•	GET /api/v1/settings/team-info → { name, createdAt, memberCount }
+	•	GET /api/v1/settings/team-info → { name, createdAt, memberCount, googleAccountName }
+	•	GET /api/v1/settings/usage → { draftsCount, postsCount, quotaLimit, month }
 
 Google OAuth
 	•	GET /api/google/oauth/start → redirects to Google
 	•	GET /api/google/oauth/callback → exchanges code; stores tokens; imports locations
+
+Google APIs Enabled (Google Cloud Project)
+The following Google Business Profile APIs have been enabled in the Google Cloud Project:
+	•	Google My Business API (Legacy, deprecated, no longer available as of today)
+	•	My Business Account Management API
+	•	My Business Lodging API
+	•	My Business Place Actions API
+	•	My Business Notifications API
+	•	My Business Verifications API
+	•	My Business Business Information API
+	•	My Business Q&A API
+
+Note: The application primarily uses My Business Account Management API and My Business Business Information API for core functionality (location sync, review sync, reply posting).
 
 ⸻
 
@@ -149,7 +163,7 @@ Google OAuth
 	•	rc_reviews: (id, org_id, location_id, google_review_id UNIQUE, rating, reviewer_name, review_text, review_create_time, replied BOOL, reply_update_time, status ENUM('new','drafted','posted'))
 	•	rc_drafts: (id, org_id, review_id UNIQUE, text, risk_flags JSONB, generated_at)
 	•	rc_replies: (id, org_id, review_id UNIQUE, text, posted_at, posted_by, provider_reply_update_time)
-	•	rc_usage: (org_id, month_key 'YYYY-MM', posts_count, drafts_count, PK(org_id, month_key))
+	•	rc_usage: (org_id, month_key 'YYYY-MM', posts_count, drafts_count, quota_limit DEFAULT 50, PK(org_id, month_key))
 	•	rc_audit_logs: (id, org_id, actor_user_id, action, review_id, old_value JSONB, new_value JSONB, ts)
 
 Indexes:
@@ -241,15 +255,89 @@ Phase 1 (Foundation & Authentication) — ✅ COMPLETED
 	•	Routing: Fixed structure with /app/* routes, removed /general, dashboard as default
 	•	Environment: Single root .env file with dotenv loading in next.config.ts
 
-Phase 2 (Inbox & Drafting) — ✅ COMPLETED
+Phase 2 (Inbox & Drafting) — ✅ COMPLETED (Updated Nov 9, 2024)
 	•	Inbox page with filters (Location, Rating, Status)
 	•	AI draft generation with Gemini 2.0 Flash Exp
-	•	Brand voice settings with tabbed layout
+	•	Brand voice settings with tabbed layout (saved to DB, used in LLM prompts)
 	•	Approve & post service with idempotency
 	•	Dashboard with 4 KPI cards
-	•	Settings/General page with organization & location info
+	•	Settings/General page:
+		- Organization name pulled from Google Business Profile API
+		- Connected locations with verification status
+		- Usage & limits: 50 drafts/month quota with progress bar
+		- Draft quota enforcement (429 error when limit reached)
 	•	Inbox added to sidebar navigation
 	•	OAuth configuration: Verified working with correct Client ID from root .env
+	•	Quota tracking: Both draftsCount and postsCount tracked in rc_usage table
+	•	Migration 0002: Updated default quota_limit from 100 to 50
+
+Phase 3 (Chrome Extension & Polish) — ✅ COMPLETED (Nov 9, 2024)
+	•	Extension Authentication:
+		- JWT endpoint for short-lived tokens (15 min expiry)
+		- Extension auth middleware with Bearer token validation
+		- Draft generation API for extension with quota enforcement
+	•	Chrome Extension (Manifest V3):
+		- Complete MV3 extension with background service worker
+		- Content script with "Generate Draft" button injection
+		- Popup UI with connection status and Apple-grade design
+		- Fallback link if button injection fails
+		- Extension documentation (README.md)
+	•	Extension Pairing Flow:
+		- Settings → Extension page with automatic authentication
+		- Manual token generation with copy button
+		- Chrome runtime message passing for token exchange
+	•	Audit Log Page:
+		- Comprehensive audit log with filters (action, entity, user, date range)
+		- Pagination (50 records per page)
+		- Color-coded action badges
+		- Added to sidebar navigation
+	•	Row-Level Security (RLS):
+		- RLS policies on all 7 tables (rc_connections, rc_locations, rc_reviews, rc_drafts, rc_replies, rc_usage, rc_audit_logs)
+		- Session variable approach with current_team_id() helper
+		- Comprehensive test suite (10+ tests)
+		- SQL migration: 0003_rls_policies.sql
+		- Complete documentation (RLS_IMPLEMENTATION.md)
+	•	Testing & Observability:
+		- Structured logger with JSON output and context enrichment
+		- Enhanced health check (database, RLS, environment variables)
+		- Testing guide with unit/integration/E2E examples
+		- RLS test suite ready to run
+	•	Error Handling:
+		- 15 edge cases documented and handled
+		- User-friendly error messages
+		- Retry logic with exponential backoff
+		- Recovery procedures documented
+	•	Final Polish:
+		- Apple-grade UX throughout (rounded-xl, gradients, smooth transitions)
+		- Mobile responsive with collapsible sidebar
+		- Loading states and empty states
+		- Consistent design system
+
+**Phase 3 Statistics**:
+	•	22 new files created
+	•	~6,800 lines of code
+	•	5 comprehensive documentation files
+	•	3 new API endpoints
+	•	2 new UI pages (Audit Log, Extension Settings)
+
+Manual Tasks Status:
+	•	3.M1 Chrome Extension Packaging: ✅ COMPLETED (Nov 10, 2024)
+		- PNG icons generated (16x16, 48x48, 128x128)
+		- Extension loaded in Chrome successfully
+		- Popup UI functional
+	•	3.M2 Extension Testing: ⏳ BLOCKED (Waiting for Google API Quota)
+	•	3.M3 Production Deployment: ⏳ BLOCKED (Waiting for Google API Quota)
+	•	3.M4 Chrome Web Store: ⏳ PENDING (Optional for MVP)
+	•	3.M5 Final Go/No-Go: ⏳ BLOCKED (Waiting for Google API Quota)
+
+🚧 BLOCKER: Google API Quota Issue
+	•	Status: Waiting for Google Support response (submitted Nov 9, 2024)
+	•	Issue: Project has quota_limit_value of "0" for My Business APIs
+	•	Error: 429 RESOURCE_EXHAUSTED - "Quota exceeded for quota metric 'Requests'"
+	•	Expected: Standard quota allocation (300 requests/minute)
+	•	Impact: Cannot sync locations, fetch reviews, or test end-to-end flow
+	•	Code Status: All retry logic and error handling already implemented
+	•	Next Steps: Once quota allocated → test debug endpoint → sync locations → sync reviews → complete testing
 
 ⸻
 

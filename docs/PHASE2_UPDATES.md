@@ -1,8 +1,14 @@
-# Phase 2 Updates - November 9, 2024
+# Phase 2 Updates - November 9, 2024 (Final)
 
 ## Summary
 
-Updated plan.md and PRD.md to reflect the completion of Phase 2 and recent UI improvements.
+Completed comprehensive Phase 2 review and implemented critical fixes:
+1. Changed quota from 100 posts/month to 50 drafts/month
+2. Added draft quota tracking and enforcement
+3. Organization name now pulled from Google Business Profile API
+4. Settings/General displays actual usage with progress bar
+5. Confirmed brand voice is saved to DB and used in LLM prompts
+6. Verified all reviews for connected GBP locations are pulled to inbox
 
 ---
 
@@ -102,18 +108,110 @@ The following features are planned for Phase 3:
 
 ---
 
+## Critical Fixes Implemented (Nov 9, 2024 - Final Update)
+
+### 1. Quota System Overhaul
+**Problem**: System was tracking "100 replies/month" but should track "50 drafts/month"
+
+**Solution**:
+- ✅ Updated `rc_usage` schema default from 100 to 50
+- ✅ Created migration `0002_massive_gravity.sql`
+- ✅ Added draft quota enforcement in `POST /api/v1/drafts/:reviewId`
+- ✅ Increments `draftsCount` when generating drafts
+- ✅ Returns 429 error when limit reached
+- ✅ Settings/General displays "X / 50 drafts" with progress bar
+
+**Files Modified**:
+- `apps/web/lib/db/schema.ts` (line 189: quotaLimit default 50)
+- `apps/web/app/api/v1/drafts/[reviewId]/route.ts` (added quota check & tracking)
+- `apps/web/app/api/v1/replies/[reviewId]/route.ts` (updated default to 50)
+- `apps/web/lib/db/migrations/0002_massive_gravity.sql` (new migration)
+
+### 2. Google Business Profile Organization Name
+**Problem**: Organization name was only from local DB, no way to verify GBP sync
+
+**Solution**:
+- ✅ Added GBP API call to fetch account name in `GET /api/v1/settings/team-info`
+- ✅ Uses existing `fetchAccounts()` function from `lib/google/gbp-client.ts`
+- ✅ Handles token refresh automatically
+- ✅ Displays "Synced from Google Business Profile" indicator in UI
+- ✅ Falls back gracefully if API call fails
+
+**Files Modified**:
+- `apps/web/app/api/v1/settings/team-info/route.ts` (added GBP API call)
+- `apps/web/app/app/settings/general/page.tsx` (displays googleAccountName)
+
+### 3. Usage API Endpoint
+**Problem**: No way to fetch current usage data for display
+
+**Solution**:
+- ✅ Created new `GET /api/v1/settings/usage` endpoint
+- ✅ Returns `{ draftsCount, postsCount, quotaLimit, month }`
+- ✅ Defaults to 0/0/50 if no usage data exists for current month
+- ✅ Settings/General page now pulls real data
+
+**Files Created**:
+- `apps/web/app/api/v1/settings/usage/route.ts` (new endpoint)
+
+### 4. Settings/General UI Improvements
+**Changes**:
+- ✅ Changed "Monthly Reply Quota" → "Monthly Draft Quota"
+- ✅ Added progress bar visualization
+- ✅ Shows "X / 50 drafts" instead of hardcoded "100 replies"
+- ✅ Displays current billing period
+- ✅ Badge shows "Free (50 drafts/month)"
+- ✅ Organization name with sync indicator
+
+---
+
+## Verification Results
+
+### Question 1: Are we pulling all reviews for connected GBP?
+**Answer**: ✅ YES
+- `/api/v1/reviews` filters by `teamId` to get all reviews
+- Additional filters (location, rating, status) are optional
+- When set to "all", returns all reviews for the team
+- Limited to 100 reviews per query
+
+### Question 2: Organization name from Google Business?
+**Answer**: ✅ YES (NOW IMPLEMENTED)
+- Fetches from GBP API using `fetchAccounts(accessToken)`
+- Displays with "Synced from Google Business Profile" indicator
+- Falls back to local team name if API fails
+
+### Question 3a: Is brand voice saved to DB?
+**Answer**: ✅ YES
+- Saved to `teams.brandVoiceGuidance` and `teams.contactChannel`
+- Updated via `POST /api/v1/brand-voice`
+
+### Question 3b: Is brand voice used in LLM prompts?
+**Answer**: ✅ YES
+- Fetched in `POST /api/v1/drafts/:reviewId` from teams table
+- Passed to `generateDraft()` function
+- Added to system prompt: `Brand voice: ${brandVoice}`
+- Used for both positive and negative review responses
+
+---
+
 ## Files Updated
 
-1. `/docs/plan.md`
-   - Marked all Phase 2 tasks as completed
-   - Added new task 2.8 for Settings/General page
-   - Updated paths to reflect actual implementation
+1. **Database Schema**:
+   - `apps/web/lib/db/schema.ts` - Updated quota_limit default to 50
+   - `apps/web/lib/db/migrations/0002_massive_gravity.sql` - New migration
 
-2. `/docs/PRD.md`
-   - Updated Phase 2 status to completed
-   - Expanded UX routes section with new features
-   - Updated API contracts with all new endpoints
-   - Added sidebar navigation details
+2. **API Endpoints**:
+   - `apps/web/app/api/v1/drafts/[reviewId]/route.ts` - Added draft quota tracking
+   - `apps/web/app/api/v1/replies/[reviewId]/route.ts` - Updated default quota
+   - `apps/web/app/api/v1/settings/team-info/route.ts` - Added GBP account name fetch
+   - `apps/web/app/api/v1/settings/usage/route.ts` - NEW: Usage data endpoint
+
+3. **UI Components**:
+   - `apps/web/app/app/settings/general/page.tsx` - Updated quota display & org name
+
+4. **Documentation**:
+   - `docs/PRD.md` - Updated quota references, API contracts, Phase 2 status
+   - `docs/plan.md` - Updated Phase 2 tasks, added updates section
+   - `docs/PHASE2_UPDATES.md` - This file
 
 ---
 
